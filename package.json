@@ -1,0 +1,77 @@
+{
+    "name": "finalproject",
+    "version": "1.0.0",
+    "description": "CAP project for appgyver",
+    "repository": "",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@cap-js/graphql": "^0.6.2",
+        "@sap/cds": "^7.0.x",
+        "@sap/cds-hana": "^2",
+        "@sap/cds-odata-v2-adapter-proxy": "1.9.21",
+        "@sap/textbundle": "4.2.0",
+        "@sap/xsenv": "3.4.0",
+        "@sap/xssec": "3.2.17",
+        "cds-swagger-ui-express": "^0.6.0",
+        "express": "^4",
+        "passport": "^0.6.0"
+    },
+    "devDependencies": {
+        "@cap-js/sqlite": "^1",
+        "@sap/cds-dk": "^7",
+        "@sap/ux-specification": "^1.108.11",
+        "cds-plugin-ui5": "^0.2.1",
+        "rimraf": "^3.0.2"
+    },
+    "engines": {
+        "node": "16.x.x",
+        "npm": "8.x.x"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "undeploy": "cf undeploy finalproject --delete-services --delete-service-keys --delete-service-brokers",
+        "watch-products": "cds watch --open finalproject.app.products/index.html?sap-ui-xx-viewCache=false --livereload false",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+        "watch-customer": "cds watch --open finalproject.app.customer/index.html?sap-ui-xx-viewCache=false --livereload false",
+        "watch-orders": "cds watch --open finalproject.app.orders/index.html?sap-ui-xx-viewCache=false --livereload false"
+    },
+    "cds": {
+        "i18n": {
+            "folders": [
+                "_i18n",
+                "i18n"
+            ]
+        },
+        "requires": {
+            "auth": {
+                "kind": "dummy-auth"
+            },
+            "db": {
+                "model": [
+                    "db",
+                    "srv"
+                ],
+                "kind": "hana",
+                "pool": {
+                    "acquireTimeoutMillis": 600000,
+                    "min": 0,
+                    "max": 600000
+                }
+            }
+        }
+    },
+    "workspaces": [
+        "app/*"
+    ],
+    "sapux": [
+        "app/products",
+        "app/customer",
+        "app/orders",
+        "app/products",
+        "app/products",
+        "app/customer",
+        "app/orders"
+    ]
+}

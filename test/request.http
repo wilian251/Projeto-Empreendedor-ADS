@@ -1,0 +1,157 @@
+@server = http://localhost:4004
+@me = Authorization: Basic {{$processEnv USER}}:
+@basic = Authorization: Basic admin:admin
+
+
+### ------------------------------------------------------------------------
+### ------------------------------------------------------------------------
+### -------------------------------CATALOG----------------------------------
+### ------------------------------------------------------------------------
+### ------------------------------------------------------------------------
+### ------------------------------------------------------------------------
+# Load Products - Action - post
+POST  {{server}}/odata/v4/catalog/loadProducts
+content-type: application/json
+Accept: application/json
+{{me}}
+
+
+### ------------------------------------------------------------------------
+# Load Products - Function - get
+
+GET  {{server}}/odata/v4/catalog/loadProductsGet(update=%27X%27)
+content-type: application/json
+
+
+
+
+### ------------------------------------------------------------------------
+# Get EAN inline
+GET  {{server}}/odata/v4/catalog/loadProducts/getEAN(barcode=%277896061951343%27)
+content-type: application/json
+
+
+
+
+### Create Product
+POST  {{server}}/catalog/Products
+Accept: application/json
+Content-Type: application/json
+
+{ 
+  "ID": "cf31b7df-51a6-47a2-a860-f6f0e1e1960e",
+  "EAN": "7894900011522",
+  "productName": "Produto Test",
+  "productDescription": "Desc produto",
+  "brand": "Marca Produto" 
+}
+
+### Read Product
+GET {{server}}/catalog/Products
+Accept:  application//xml
+Content-Type: application/xml
+
+### Read Product with filter
+GET {{server}}/catalog/Products?filter=(substringof(%27Lenco%27,productName)%20or%20substringof(%27Lenço%27,brand))
+
+### Read product specific 
+GET {{server}}/catalog/Products(cf31b7df-51a6-47a2-a860-f6f0e1e1960e)
+
+
+
+
+### Read Binary
+GET {{server}}/catalog/Products(cf31b7df-51a6-47a2-a860-f6f0e1e1960e)/imageContent
+
+### Update Product
+PUT  {{server}}/catalog/Products(cf31b7df-51a6-47a2-a860-f6f0e1e1960e)
+Accept: application/json
+Content-Type: application/json
+
+{ 
+  "productDescription": "Desc produto alterado",
+  "imageType": "image/pdf"
+}
+
+### Upload Binary
+PUT {{server}}/catalog/Products(cf31b7df-51a6-47a2-a860-f6f0e1e1960e)/imageContent
+Content-Type: image/png
+
+< ./Test.png
+
+
+
+### Delete Product Content
+DELETE {{server}}/catalog/Products(cf31b7df-51a6-47a2-a860-f6f0e1e1960e)/imageContent
+
+### Delete Product 
+DELETE {{server}}/catalog/Products(80d94aaa-f9e1-4ee5-81a7-b4ae58ff573a)
+
+
+### ------------------------------------------------------------------------
+### ------------------------------------------------------------------------
+### ----------------------------CATALOG REST--------------------------------
+### ------------------------------------------------------------------------
+### ------------------------------------------------------------------------
+### ------------------------------------------------------------------------
+### ------------------------------------------------------------------------
+
+
+### ------------------------------------------------------------------------
+# Get EAN
+GET  {{server}}/catalog-rest/getEAN
+content-type: application/json
+{{me}}
+
+{ "barcode": "7896061951343"}
+
+### ------------------------------------------------------------------------
+# Get EAN inline
+GET  {{server}}/catalog-rest/getEAN(barcode=7896061951343)
+content-type: application/json
+{{me}}
+
+
+### Update Product
+PUT {{server}}/catalog-rest/Products/fc89c32c-eff8-4ff7-98f2-60e54cb322b1
+Accept: application/json
+Content-Type: application/json
+
+{ 
+  "productDescription": "Pro Test2"
+}
+
+
+### Read Product
+GET {{server}}/catalog-rest/Products
+
+
+### Read Product with filter
+GET {{server}}/catalog/Products?filter=(substringof(%27Lenco%27,productName)%20or%20substringof(%27Lenço%27,brand))
+
+
+### Read product specific 
+GET {{server}}/catalog-rest/Products/cf31b7df-51a6-47a2-a860-f6f0e1e1960e
+
+
+### Read Binary
+GET   {{server}}/catalog-rest/Products/cf31b7df-51a6-47a2-a860-f6f0e1e1960e/imageContent
+
+
+### Create Product Image
+POST  {{server}}/catalog-rest/postImageContent
+Accept: application/json
+Content-Type: application/json
+
+{ 
+  "ID": "cf31b7df-51a6-47a2-a860-f6f0e1e1960e",
+  "contentURL": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjWNMW/R8ABfwCjc2t99UAAAAASUVORK5CYII="
+}
+
+### Delete Product 
+DELETE {{server}}/catalog-rest/Products/cee3898f-2e08-4f01-8ef5-7c564a5a383e
+
+
+### Delete Product Content
+POST {{server}}/catalog-rest/Products/cf31b7df-51a6-47a2-a860-f6f0e1e1960e/deleteImageContent
+
