@@ -14,68 +14,59 @@ namespace finalproject;
 //------------------------------------------------------//
 //------------------------------------------------------//
 //Entity
-entity Users : User, cuid, managed {
-  name : String;
-  surname : String;
-  email : String;
+entity Users : cuid, managed {
+  userEmail : String;
+  userName : String;
+  userSurname : String;
   active : Boolean;
 }
 
 
 @cds.odata.valuelist
 //Annotation
-annotate User with @(
-  title              : '{i18n>User}',
+annotate Users with @(
+  title              : '{i18n>Users}',
   description        : '{i18n>Users}',
   UI.TextArrangement : #TextOnly,
-  Common.SemanticKey : [EAN],
+  Common.SemanticKey : [userEmail],
   UI.Identification  : [{
     $Type : 'UI.DataField',
-    Value : EAN
+    Value : userEmail
   }]
 ) {
   ID @(
         Core.Computed,
         Common.Text : {
-            $value                 : EAN,
+            $value                 : userEmail,
             ![@UI.TextArrangement] : #TextOnly
         }
   );
-  EAN            @(
-    title       : '{i18n>EAN}',
-    description : '{i18n>EAN}',
+  userEmail            @(
+    title       : '{i18n>email}',
+    description : '{i18n>email}',
     Common      : {
         FieldControl             : #Mandatory,
-    //  Text : {
-    //    $value                 : productDescription,
-    //    ![@UI.TextArrangement] : #TextLast
-    //  }
+        Text : {
+          $value                 : userName,
+          ![@UI.TextArrangement] : #TextLast
+      }
     }
   );
-  productName @(
-    title       : '{i18n>productName}',
-    description : '{i18n>productName}',
+  userName @(
+    title       : '{i18n>name}',
+    description : '{i18n>name}',
     Common      : {
       FieldControl : #Mandatory,
-      TextFor      : EAN
+      TextFor      : email
     }
   );
-  productDescription @(
-    title       : '{i18n>productDescription}',
-    description : '{i18n>productDescription}',
+  userSurname @(
+    title       : '{i18n>surname}',
+    description : '{i18n>surname}',
   );
-  brand @(
-    title       : '{i18n>brand}',
-    description : '{i18n>brand}',
-  );
-  obs @(
-    title       : '{i18n>obs}',
-    description : '{i18n>obs}',
-    UI.MultiLineText: true,
-  );
-  image @(
-    title       : '{i18n>imageContent}',
-    description : '{i18n>imageContent}',
+  active @(
+    title       : '{i18n>active}',
+    description : '{i18n>active}',
   );
 };
 
@@ -84,212 +75,212 @@ annotate User with @(
 //------------------------------------------------------//
 //------------------------------------------------------//
 //Entity
-entity Customer : cuid , managed {
-    customerName : String;
-    customerAddress : String;
-    customerState: String;
-    customerHouseNum: LargeString;
-}
+// entity Customer : cuid , managed {
+//     customerName : String;
+//     customerAddress : String;
+//     customerState: String;
+//     customerHouseNum: LargeString;
+// }
 
 
-@cds.odata.valuelist
-//Annotation
-annotate Customer with @(
-  title              : '{i18n>Customer}',
-  description        : '{i18n>Customer}',
-  UI.TextArrangement : #TextOnly,
-  Common.SemanticKey : [customerName],
-  UI.Identification  : [{
-    $Type : 'UI.DataField',
-    Value : customerName
-  }]
-) {
-  ID @(
-        Core.Computed,
-        Common.Text : {
-            $value                 : customerName,
-            ![@UI.TextArrangement] : #TextOnly
-        }
-  );
-  customerName @(
-    title       : '{i18n>customerName}',
-    description : '{i18n>customerName}',
-    Common      : {
-        FieldControl             : #Mandatory
-    }
-  );
-  customerAddress @(
-    title       : '{i18n>customerAddress}',
-    description : '{i18n>customerAddress}',
-    Common      : {
-      FieldControl : #Mandatory
-    }
-  );
-  customerState @(
-    title       : '{i18n>customerState}',
-    description : '{i18n>customerState}',
-  );
-  customerHouseNum @(
-    title       : '{i18n>customerHouseNum}',
-    description : '{i18n>customerHouseNum}',
-  );
-};
+// @cds.odata.valuelist
+// //Annotation
+// annotate Customer with @(
+//   title              : '{i18n>Customer}',
+//   description        : '{i18n>Customer}',
+//   UI.TextArrangement : #TextOnly,
+//   Common.SemanticKey : [customerName],
+//   UI.Identification  : [{
+//     $Type : 'UI.DataField',
+//     Value : customerName
+//   }]
+// ) {
+//   ID @(
+//         Core.Computed,
+//         Common.Text : {
+//             $value                 : customerName,
+//             ![@UI.TextArrangement] : #TextOnly
+//         }
+//   );
+//   customerName @(
+//     title       : '{i18n>customerName}',
+//     description : '{i18n>customerName}',
+//     Common      : {
+//         FieldControl             : #Mandatory
+//     }
+//   );
+//   customerAddress @(
+//     title       : '{i18n>customerAddress}',
+//     description : '{i18n>customerAddress}',
+//     Common      : {
+//       FieldControl : #Mandatory
+//     }
+//   );
+//   customerState @(
+//     title       : '{i18n>customerState}',
+//     description : '{i18n>customerState}',
+//   );
+//   customerHouseNum @(
+//     title       : '{i18n>customerHouseNum}',
+//     description : '{i18n>customerHouseNum}',
+//   );
+// };
 
 
 
-//----------------------- ORDERS  ----------------------//
+//----------------------- Address ----------------------//
 //------------------------------------------------------//
 //------------------------------------------------------//
 //Entity
-entity Orders : cuid , managed {
-      orderNumber: String;
-      orderDescription : String;
-      customer: Association to one Customer;
-      orderItems: Composition of many OrderItems on orderItems.order = $self;
-}
+// entity Address : cuid , managed {
+//       zipCode: String;
+//       orderDescription : String;
+//       customer: Association to one Customer;
+//       orderItems: Composition of many OrderItems on orderItems.order = $self;
+// }
 
-@cds.odata.valuelist
-//Annotation
-annotate Orders with @(
-  title              : '{i18n>Orders}',
-  description        : '{i18n>Orders}',
-  UI.TextArrangement : #TextOnly,
-  Common.SemanticKey : [orderNumber],
-  UI.Identification  : [{
-    $Type : 'UI.DataField',
-    Value : orderNumber
-  }]
-) {
-  ID @(
-        Core.Computed,
-        Common.Text : {
-            $value                 : orderNumber,
-            ![@UI.TextArrangement] : #TextOnly
-        }
-  );
-  orderNumber @(
-    title       : '{i18n>orderNumber}',
-    description : '{i18n>orderNumber}',
-    Common      : {
-        FieldControl             : #Mandatory
-    }
-  );
-  orderDescription @(
-    title       : '{i18n>orderDescription}',
-    description : '{i18n>orderDescription}',
-    Common      : {
-      FieldControl : #Mandatory
-    }
-  );
-  customer @(
-    title       : '{i18n>customer}',
-    description : '{i18n>customer}',
-  );
-  orderItems @(
-    title       : '{i18n>orderItems}',
-    description : '{i18n>orderItems}',
-  );
-};
+// @cds.odata.valuelist
+// //Annotation
+// annotate Orders with @(
+//   title              : '{i18n>Orders}',
+//   description        : '{i18n>Orders}',
+//   UI.TextArrangement : #TextOnly,
+//   Common.SemanticKey : [orderNumber],
+//   UI.Identification  : [{
+//     $Type : 'UI.DataField',
+//     Value : orderNumber
+//   }]
+// ) {
+//   ID @(
+//         Core.Computed,
+//         Common.Text : {
+//             $value                 : orderNumber,
+//             ![@UI.TextArrangement] : #TextOnly
+//         }
+//   );
+//   orderNumber @(
+//     title       : '{i18n>orderNumber}',
+//     description : '{i18n>orderNumber}',
+//     Common      : {
+//         FieldControl             : #Mandatory
+//     }
+//   );
+//   orderDescription @(
+//     title       : '{i18n>orderDescription}',
+//     description : '{i18n>orderDescription}',
+//     Common      : {
+//       FieldControl : #Mandatory
+//     }
+//   );
+//   customer @(
+//     title       : '{i18n>customer}',
+//     description : '{i18n>customer}',
+//   );
+//   orderItems @(
+//     title       : '{i18n>orderItems}',
+//     description : '{i18n>orderItems}',
+//   );
+// };
 
 //--------------------- ORDERS ITEMS -------------------//
 //------------------------------------------------------//
 //------------------------------------------------------//
 //Entity
-entity OrderItems : cuid , managed {
-      order: Association to Orders;
-      product: Association to Products;
-      itemQtd: Integer;
-}
+// entity OrderItems : cuid , managed {
+//       order: Association to Orders;
+//       product: Association to Products;
+//       itemQtd: Integer;
+// }
 
 
-@cds.odata.valuelist
-//Annotation
-annotate OrderItems with @(
-  title              : '{i18n>OrderItems}',
-  description        : '{i18n>OrderItems}',
-  UI.TextArrangement : #TextOnly,
-  Common.SemanticKey : [order.orderNumber, product.productName],
-  UI.Identification  : [{
-    $Type : 'UI.DataField',
-    Value : order.orderNumber
-  },
-  {
-    $Type : 'UI.DataField',
-    Value : product.productName
-  },
-  ]
-) {
-  ID @(
-        Core.Computed,
-        Common.Text : {
-            $value                 : order.orderNumber,
-            ![@UI.TextArrangement] : #TextOnly
-        }
-  );
-  order @(
-    title       : '{i18n>order}',
-    description : '{i18n>order}',
-    Common      : {
-        FieldControl             : #Mandatory,
-        Text      : {
-                $value                 : order.orderNumber,
-                ![@UI.TextArrangement] : #TextOnly
-            },
-          ValueList                : {
-              CollectionPath : 'Orders',
-              SearchSupported: true,
-              Parameters     : [
-                {
-                    $Type             : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : 'order_ID',
-                    ValueListProperty : 'ID'
-                },
-                {
-                    $Type             : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'orderNumber',
+// @cds.odata.valuelist
+// //Annotation
+// annotate OrderItems with @(
+//   title              : '{i18n>OrderItems}',
+//   description        : '{i18n>OrderItems}',
+//   UI.TextArrangement : #TextOnly,
+//   Common.SemanticKey : [order.orderNumber, product.productName],
+//   UI.Identification  : [{
+//     $Type : 'UI.DataField',
+//     Value : order.orderNumber
+//   },
+//   {
+//     $Type : 'UI.DataField',
+//     Value : product.productName
+//   },
+//   ]
+// ) {
+//   ID @(
+//         Core.Computed,
+//         Common.Text : {
+//             $value                 : order.orderNumber,
+//             ![@UI.TextArrangement] : #TextOnly
+//         }
+//   );
+//   order @(
+//     title       : '{i18n>order}',
+//     description : '{i18n>order}',
+//     Common      : {
+//         FieldControl             : #Mandatory,
+//         Text      : {
+//                 $value                 : order.orderNumber,
+//                 ![@UI.TextArrangement] : #TextOnly
+//             },
+//           ValueList                : {
+//               CollectionPath : 'Orders',
+//               SearchSupported: true,
+//               Parameters     : [
+//                 {
+//                     $Type             : 'Common.ValueListParameterInOut',
+//                     LocalDataProperty : 'order_ID',
+//                     ValueListProperty : 'ID'
+//                 },
+//                 {
+//                     $Type             : 'Common.ValueListParameterDisplayOnly',
+//                     ValueListProperty : 'orderNumber',
 
-                },
-                {
-                    $Type             : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'orderDescription'
-                }
-              ]
-          }
-    }
-  );
-  product @(
-    title       : '{i18n>product}',
-    description : '{i18n>product}',
-    Common      : {
-      FieldControl : #Mandatory,
-      Text      : {
-        $value                 : product.productName,
-        ![@UI.TextArrangement] : #TextOnly
-      },
-      ValueList                : {
-        CollectionPath : '',
-        SearchSupported: true,
-        Parameters     : [
-          {
-              $Type             : 'Common.ValueListParameterInOut',
-              LocalDataProperty : 'product_ID',
-              ValueListProperty : 'ID'
-          },
-          {
-              $Type             : 'Common.ValueListParameterDisplayOnly',
-              ValueListProperty : 'productName',
+//                 },
+//                 {
+//                     $Type             : 'Common.ValueListParameterDisplayOnly',
+//                     ValueListProperty : 'orderDescription'
+//                 }
+//               ]
+//           }
+//     }
+//   );
+//   product @(
+//     title       : '{i18n>product}',
+//     description : '{i18n>product}',
+//     Common      : {
+//       FieldControl : #Mandatory,
+//       Text      : {
+//         $value                 : product.productName,
+//         ![@UI.TextArrangement] : #TextOnly
+//       },
+//       ValueList                : {
+//         CollectionPath : '',
+//         SearchSupported: true,
+//         Parameters     : [
+//           {
+//               $Type             : 'Common.ValueListParameterInOut',
+//               LocalDataProperty : 'product_ID',
+//               ValueListProperty : 'ID'
+//           },
+//           {
+//               $Type             : 'Common.ValueListParameterDisplayOnly',
+//               ValueListProperty : 'productName',
 
-          },
-          {
-              $Type             : 'Common.ValueListParameterDisplayOnly',
-              ValueListProperty : 'productDescription'
-          }
-        ]
-      }
-    } 
-  );
-  itemQtd @(
-    title       : '{i18n>itemQtd}',
-    description : '{i18n>itemQtd}',
-  );
-};
+//           },
+//           {
+//               $Type             : 'Common.ValueListParameterDisplayOnly',
+//               ValueListProperty : 'productDescription'
+//           }
+//         ]
+//       }
+//     } 
+//   );
+//   itemQtd @(
+//     title       : '{i18n>itemQtd}',
+//     description : '{i18n>itemQtd}',
+//   );
+// };
