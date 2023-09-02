@@ -6,9 +6,9 @@ using CatalogServiceDraft from './cat-service-draft';
 //List Page
 annotate CatalogServiceDraft.ProductsFiori with @(UI: {
         LineItem: [
-			{   
+            {   
                 $Type: 'UI.DataField', 
-                Value: productName,
+                Value: code,
                 ![@UI.Importance] : #High
             },
 			{   
@@ -23,73 +23,69 @@ annotate CatalogServiceDraft.ProductsFiori with @(UI: {
             },
             {   
                 $Type : 'UI.DataField', 
-                Value : brand,
+                Value : productValue,
                 ![@UI.Importance] : #High
             },
             {   
                 $Type : 'UI.DataField', 
-                Value : EAN,
+                Value : productActive,
                 ![@UI.Importance] : #High
             }
 		],
         PresentationVariant : {
             $Type     : 'UI.PresentationVariantType',
-            SortOrder : [{Property : productName}]
+            SortOrder : [{Property : code}]
         },
         SelectionFields: [ 
+            code,
             productName,
             productDescription,
-            brand,
-            EAN
+            productActive
         ],
 	},
-//Object Page
+    //Object Page
 	UI: {
         HeaderInfo: {          
             Title : { 
-                Value: productName
+                Value: code
             },
             TypeName: '{i18n>Product}',
             TypeNamePlural: '{i18n>Products}',
-            ImageUrl : image,
-            ///TypeImageUrl : 'image/png',
             Description: { 
-                Value: EAN 
+                Value: productName 
             }, 
         },
 		HeaderFacets            : [
-        /*    {
+            /*{
                 $Type             : 'UI.ReferenceFacet',
-                Target            : '@UI.FieldGroup#Image',
+                Target            : '@UI.FieldGroup#GeneralData',
                 ![@UI.Importance] : #Medium
-            },
-        */
+            },*/
         ],
         FieldGroup #GeneralData: {
             $Type : 'UI.FieldGroupType',
 			Data: [
                 {
                     $Type : 'UI.DataField',
+                    Value: productName
+                },
+                {
+                    $Type : 'UI.DataField',
                     Value: productDescription
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: brand
+                    Value: productValue
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: EAN
-                },
-                {
-                    $Type : 'UI.DataField',
-                    Value: obs
-                }               
+                    Value: productActive
+                }              
 			]                        
         },
 
         // Page Facets
 		Facets: [
-
             {    
                 $Type: 'UI.ReferenceFacet', 
                 Label: '{i18n>GeneralData}', 
@@ -105,93 +101,170 @@ annotate CatalogServiceDraft.ProductsFiori with @(UI: {
 //List Page
 annotate CatalogServiceDraft.CustomerFiori with @(UI: {
         LineItem: [
-
-			{   
+            {   
                 $Type: 'UI.DataField', 
-                Value: customerName,
+                Value: CNPJ,
                 ![@UI.Importance] : #High
             },
             {   
                 $Type : 'UI.DataField', 
-                Value : customerAddress,
+                Value : company,
                 ![@UI.Importance] : #High
             },
             {   
                 $Type : 'UI.DataField', 
-                Value : customerAddress,
+                Value : customerName,
                 ![@UI.Importance] : #High
             },
             {   
                 $Type : 'UI.DataField', 
-                Value : customerHouseNum,
+                Value : customerSurname,
                 ![@UI.Importance] : #High
             },
             {   
                 $Type : 'UI.DataField', 
-                Value : customerState,
+                Value : customerSituation,
                 ![@UI.Importance] : #High
             }
-		],
+        ],
         PresentationVariant : {
             $Type     : 'UI.PresentationVariantType',
-            SortOrder : [{Property : customerName}]
+            SortOrder : [{Property : CPNJ}]
         },
         SelectionFields: [ 
+            CNPJ,
             customerName,
-            customerState
+            customerEmail,
+            customerSituation,
+            customerType
         ],
-	},
-//Object Page
+    },
+    //Object Page
 	UI: {
         HeaderInfo: {          
             Title : { 
-                Value: customerName
+                Value: CNPJ
             },
-            TypeName: '{i18n>Customer}',
-            TypeNamePlural: '{i18n>Customer}',
-            ///TypeImageUrl : 'image/png',
-            // Description: { 
-            //    Value: customerState 
-            //}, 
+            TypeName: '{i18n>CNPJ}',
+            TypeNamePlural: '{i18n>CNPJ}',
+             Description: { 
+                Value: customerName 
+            }, 
         },
 		HeaderFacets            : [
-        /*    {
+            {
                 $Type             : 'UI.ReferenceFacet',
-                Target            : '@UI.FieldGroup#Image',
+                Target            : '@UI.FieldGroup#Admin',
                 ![@UI.Importance] : #Medium
             },
-        */
         ],
+        FieldGroup #Admin: {
+            Data : [
+                {
+                    $Type : 'UI.DataField',
+                    Value : createdBy
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value : modifiedBy
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value : createdAt
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value : modifiedAt
+                }
+            ]
+        },
         FieldGroup #GeneralData: {
             $Type : 'UI.FieldGroupType',
 			Data: [
+                {
+                    $Type : 'UI.DataField',
+                    Value: company
+                },
                 {
                     $Type : 'UI.DataField',
                     Value: customerName
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: customerAddress
+                    Value: customerSurname
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: customerHouseNum
-                } ,
+                    Value: customerEmail
+                },
                 {
                     $Type : 'UI.DataField',
-                    Value: customerState
-                }                   
+                    Value: telephone
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: customerSituation
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: customerSource
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: customerType
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: customerActive
+                }
 			]                        
+        },
+        FieldGroup #Adress : {
+            $Type : 'UI.FieldGroupType',
+            Data : [
+                {
+                    $Type: 'UI.DataField',
+                    Value: adress.street
+                },
+                {
+                    $Type: 'UI.DataField',
+                    Value: adress.number
+                },
+                {
+                    $Type: 'UI.DataField',
+                    Value: adress.zipCode
+                },
+                {
+                    $Type: 'UI.DataField',
+                    Value: adress.neighborhood
+                },
+                {
+                    $Type: 'UI.DataField',
+                    Value: adress.city
+                },
+                {
+                    $Type: 'UI.DataField',
+                    Value: adress.state
+                },
+                {
+                    $Type: 'UI.DataField',
+                    Value: adress.country
+                }
+            ]
         },
 
         // Page Facets
 		Facets: [
-
             {    
                 $Type: 'UI.ReferenceFacet', 
                 Label: '{i18n>GeneralData}', 
                 Target: '@UI.FieldGroup#GeneralData'
-            }
+            },
+            {    
+                $Type: 'UI.ReferenceFacet', 
+                Label: '{i18n>address}', 
+                Target: 'address/@UI.Identification'
+            },
         ]    
     }
 );
@@ -216,12 +289,22 @@ annotate CatalogServiceDraft.OrdersFiori with @(
             },
             {   
                 $Type : 'UI.DataField', 
-                Value : customer.customerName,
+                Value : orderExpirationDate,
+                ![@UI.Importance] : #High
+            },
+            {   
+                $Type : 'UI.DataField', 
+                Value : orderStatus,
+                ![@UI.Importance] : #High
+            },
+            {   
+                $Type : 'UI.DataField', 
+                Value : customer.CNPJ,
                 ![@UI.Importance] : #High
             },
             {
                 $Type : 'UI.DataField',
-                Value : customer.customerState,
+                Value : customer.customerNAme,
                 ![@UI.Importance] : #High
             }
 		],
@@ -232,10 +315,12 @@ annotate CatalogServiceDraft.OrdersFiori with @(
         SelectionFields: [ 
             orderNumber,
             orderDescription,
+            orderExpirationDate,
+            orderStatus,
             customer_ID
         ],
 	},
-//Object Page
+    //Object Page
 	UI: {
         HeaderInfo: {          
             Title : { 
@@ -244,11 +329,10 @@ annotate CatalogServiceDraft.OrdersFiori with @(
             TypeName: '{i18n>Order}',
             TypeNamePlural: '{i18n>OrderItems}',
             Description: { 
-                Value: orderDescription 
+                Value: orderDescription
             }, 
         },
 		HeaderFacets            : [
-
             {
                 $Type             : 'UI.ReferenceFacet',
                 Target            : '@UI.FieldGroup#Admin',
@@ -265,7 +349,15 @@ annotate CatalogServiceDraft.OrdersFiori with @(
                 {
                     $Type : 'UI.DataField',
                     Value: orderDescription
-                },                
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: orderExpirationDate
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: orderStatus
+                },              
                 {
                     $Type : 'UI.DataField',
                     Value: customer_ID
@@ -333,12 +425,12 @@ annotate CatalogServiceDraft.OrderItemsFiori with @(
         HeaderInfo: {         
             Title: {
                 $Type : 'UI.DataField',
-                Value : '{i18n>OrderItems}'
+                Value : '{i18n>orderItems}'
             },    
-            TypeName       : '{i18n>Item}',
-            TypeNamePlural : '{i18n>Items}',
+            TypeName       : '{i18n>item}',
+            TypeNamePlural : '{i18n>items}',
             Description    : {
-                Value : '{i18n>OrderItems}'
+                Value : '{i18n>orderItems}'
             }
         },    
         FieldGroup #Details : {
@@ -350,21 +442,26 @@ annotate CatalogServiceDraft.OrderItemsFiori with @(
                 },
                 {
                     $Type : 'UI.DataField',
+                    Value : item,
+                    ![@UI.Importance] : #High
+                }   
+                {
+                    $Type : 'UI.DataField',
                     Value : itemQtd,
                     ![@UI.Importance] : #High
                 }        
             ]
         },
-    // Page Facets
+        // Page Facets
         Facets : [
             {
                 $Type  : 'UI.CollectionFacet',
                 ID     : 'OrderDetails',
-                Label  : '{i18n>Details}',
+                Label  : '{i18n>details}',
                 Facets : [
                     {
                         $Type  : 'UI.ReferenceFacet',
-                        Label  : '{i18n>Details}',
+                        Label  : '{i18n>details}',
                         Target : '@UI.FieldGroup#Details'
                     }
                 ]

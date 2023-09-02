@@ -4,17 +4,17 @@ const { getBundle } = require('./i18n');
 async function ProductCreate(req){
     let bundle = getBundle(req.user.locale);
     const tx = cds.transaction(req);
-    let EAN = req.data.EAN.replace(" ","");
+    let oCode = req.data.code.replace(" ","");
             
     let oProduct =  await tx.read(cds.services.CatalogService.entities.Products, ['ID'])
                         .where(
                             { 
-                                EAN: EAN
+                                code: oCode
                             }
                         );
 
     if (oProduct.length > 0) {
-        const txt = bundle.getText("mERROR_UNIQUE",[req.data.EAN, bundle.getText("mEAN")]);
+        const txt = bundle.getText("mERROR_UNIQUE",[req.data.code, bundle.getText("mCode")]);
         return req.error(410, txt);
     }
 };
@@ -22,65 +22,43 @@ async function ProductCreate(req){
 async function ProductUpdate(req){
     let bundle = getBundle(req.user.locale);
     const tx = cds.transaction(req);
-    //Validar EAN
-    let EAN = req.data.EAN?.replace(" ","");     
-    if (EAN) {
+    //Validar code
+    let oCode = req.data.code?.replace(" ","");     
+    if (oCode) {
     let oProduct =  await tx.read(cds.services.CatalogService.entities.Products, ['ID'])
                         .where(
                         { 
                             ID: {
                                 '<>': req.data.ID
                             },
-                            EAN: EAN
+                            code: oCode
                         }
                     );
         if (oProduct.length > 0) {
-            const txt = bundle.getText("mERROR_UNIQUE",[req.data.EAN, bundle.getText("mEAN")]);
+            const txt = bundle.getText("mERROR_UNIQUE",[req.data.code, bundle.getText("mCode")]);
             return req.error(410, txt);
         }
     }
-/*
-    //Validar ImageType
-    if (req.data.imageType !== undefined){
-        if(req.data.imageType === null){
-            const txt = bundle.getText("mERROR_DELETE_FIELD", 'imageType');
-            req.error(410, txt);   
-        }
-       //Returning old value
-        let oProduct =  await tx.read(cds.services.CatalogService.entities.Products, ['imageType'])
-                        .where({ID:  req.data.ID});
-                           
-        if (oProduct.length > 0 && oProduct[0].imageType){
-            req.data.imageType =  oProduct[0].imageType;
-        }
-        
-    }
-*/
 };
 
 async function ProductDelete(req){
     let bundle = getBundle(req.user.locale);
-     //Verifica se está tentando somente apagar o imageType
-     if (req.data.imageType !== undefined && req.data.imageType === null){
-        const txt = bundle.getText("mERROR_DELETE_FIELD", 'imageType');
-        req.error(410, txt);
-    }
 
     const tx = cds.transaction(req);
-    let EAN = req.data.EAN?.replace(" ","");
+    let oCode = req.data.code?.replace(" ","");
             
-    if (EAN) {
+    if (oCode) {
     let oProduct =  await tx.read(cds.services.CatalogService.entities.Products, ['ID'])
                         .where(
                         { 
                             ID: {
                                 '<>': req.data.ID
                             },
-                            EAN: EAN
+                            code: oCode
                         }
                     );
         if (oProduct.length > 0) {
-            const txt = bundle.getText("mERROR_UNIQUE",[req.data.EAN, bundle.getText("mEAN")]);
+            const txt = bundle.getText("mERROR_UNIQUE",[req.data.code, bundle.getText("mCode")]);
             return req.error(410, txt);
         }
     }

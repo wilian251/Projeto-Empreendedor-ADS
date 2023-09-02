@@ -7,14 +7,4 @@ service CatalogService {// @( requires:'authenticated-user') {
     entity Customer as projection on finalproject.Customer ;
     entity Orders as projection on finalproject.Orders ;
     entity OrderItems as projection on finalproject.OrderItems;
-
-
-    type product {};
-
-    function getEAN (barcode: String)  returns product;
-
-    action loadProducts() returns {};
-
-    function loadProductsGet (update: String)  returns product;
-    
 }
