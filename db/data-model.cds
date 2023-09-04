@@ -10,7 +10,7 @@ using {
 
 namespace finalproject;
 
-//----------------------- Usuário  ---------------------//
+//----------------------- Usuários ---------------------//
 //------------------------------------------------------//
 //------------------------------------------------------//
 //Entity
@@ -18,7 +18,7 @@ entity Users : cuid, managed {
   userEmail : String;
   userName : String;
   userSurname : String;
-  active : Boolean;
+  userActive : Boolean;
 }
 
 
@@ -64,7 +64,7 @@ annotate Users with @(
     title       : '{i18n>surname}',
     description : '{i18n>surname}',
   );
-  active @(
+  userActive @(
     title       : '{i18n>active}',
     description : '{i18n>active}',
   );
@@ -343,10 +343,6 @@ annotate Orders with @(
     title       : '{i18n>orderStatus}',
     description : '{i18n>orderStatus}',
   );
-  customer @(
-    title       : '{i18n>customer}',
-    description : '{i18n>customer}',
-  );
   orderItems @(
     title       : '{i18n>orderItems}',
     description : '{i18n>orderItems}',
@@ -472,8 +468,8 @@ entity Proposal : cuid, managed {
   proposalTitle: String;
   proposalExpirationDate: Date;
   proposalStatus: Integer;
-  customer: Association to one Customer
-  order: Association to Orders;
+  customer: Association to one Customer;
+  ///order: Association to Orders;
 }
 
 @cds.odata.valuelist

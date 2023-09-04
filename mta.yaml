@@ -45,6 +45,10 @@ modules:
     build-result: resources
     requires:
     - artifacts:
+      - finalprojectappusers.zip
+      name: finalprojectappusers
+      target-path: resources/
+    - artifacts:
       - finalprojectappproducts.zip
       name: finalprojectappproducts
       target-path: resources/
@@ -56,6 +60,16 @@ modules:
       - finalprojectapporders.zip
       name: finalprojectapporders
       target-path: resources/
+- name: finalprojectappusers
+  type: html5
+  path: app/users
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 - name: finalprojectappproducts
   type: html5
   path: app/products
