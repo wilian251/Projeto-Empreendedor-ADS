@@ -150,7 +150,6 @@ entity Customer : cuid , managed {
   customerEmail: String;
   telephone: String;
   CNPJ: Integer;
-  customerSituation: String;
   customerSource: String;
   customerType: String;
   customerActive: Boolean;
@@ -210,10 +209,6 @@ annotate Customer with @(
     title       : '{i18n>telephone}',
     description : '{i18n>telephone}',
   );
-  customerSituation @(
-    title       : '{i18n>customerSituation}',
-    description : '{i18n>customerSituation}',
-  );
   customerSource @(
     title       : '{i18n>customerSource}',
     description : '{i18n>customerSource}',
@@ -236,7 +231,7 @@ entity Products : cuid , managed {
   code: Integer;
   productName: String;
   productDescription: String;
-  productValue: Double;
+  productValue: Decimal;
   productActive: Boolean;
 }
 

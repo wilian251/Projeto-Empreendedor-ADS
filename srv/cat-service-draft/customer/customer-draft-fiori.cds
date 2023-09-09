@@ -6,29 +6,29 @@ using CustomerServiceDraft from './customer-draft-service';
 //List Page
 annotate CustomerServiceDraft.CustomerFiori with @(UI: {
         LineItem: [
-            {   
-                $Type: 'UI.DataField', 
+            {
+                $Type: 'UI.DataField',
                 Value: CNPJ,
                 ![@UI.Importance] : #High
             },
-            {   
-                $Type : 'UI.DataField', 
+            {
+                $Type : 'UI.DataField',
                 Value : company,
                 ![@UI.Importance] : #High
             },
-            {   
-                $Type : 'UI.DataField', 
+            {
+                $Type : 'UI.DataField',
                 Value : customerName,
                 ![@UI.Importance] : #High
             },
-            {   
-                $Type : 'UI.DataField', 
+            {
+                $Type : 'UI.DataField',
                 Value : customerSurname,
                 ![@UI.Importance] : #High
             },
-            {   
-                $Type : 'UI.DataField', 
-                Value : customerSituation,
+            {
+                $Type : 'UI.DataField',
+                Value : customerActive,
                 ![@UI.Importance] : #High
             }
         ],
@@ -36,25 +36,24 @@ annotate CustomerServiceDraft.CustomerFiori with @(UI: {
             $Type     : 'UI.PresentationVariantType',
             SortOrder : [{Property : CPNJ}]
         },
-        SelectionFields: [ 
+        SelectionFields: [
             CNPJ,
             customerName,
             customerEmail,
-            customerSituation,
             customerType
         ],
     },
     //Object Page
 	UI: {
-        HeaderInfo: {          
-            Title : { 
+        HeaderInfo: {
+            Title : {
                 Value: CNPJ
             },
             TypeName: '{i18n>CNPJ}',
             TypeNamePlural: '{i18n>CNPJ}',
-             Description: { 
-                Value: customerName 
-            }, 
+             Description: {
+                Value: customerName
+            },
         },
 		HeaderFacets            : [
             {
@@ -108,10 +107,6 @@ annotate CustomerServiceDraft.CustomerFiori with @(UI: {
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: customerSituation
-                },
-                {
-                    $Type : 'UI.DataField',
                     Value: customerSource
                 },
                 {
@@ -122,54 +117,60 @@ annotate CustomerServiceDraft.CustomerFiori with @(UI: {
                     $Type : 'UI.DataField',
                     Value: customerActive
                 }
-			]                        
+			]
         },
-        FieldGroup #Adress : {
-            $Type : 'UI.FieldGroupType',
-            Data : [
-                {
-                    $Type: 'UI.DataField',
-                    Value: adress.street
-                },
-                {
-                    $Type: 'UI.DataField',
-                    Value: adress.number
-                },
-                {
-                    $Type: 'UI.DataField',
-                    Value: adress.zipCode
-                },
-                {
-                    $Type: 'UI.DataField',
-                    Value: adress.neighborhood
-                },
-                {
-                    $Type: 'UI.DataField',
-                    Value: adress.city
-                },
-                {
-                    $Type: 'UI.DataField',
-                    Value: adress.state
-                },
-                {
-                    $Type: 'UI.DataField',
-                    Value: adress.country
-                }
-            ]
-        },
-
         // Page Facets
 		Facets: [
-            {    
-                $Type: 'UI.ReferenceFacet', 
-                Label: '{i18n>GeneralData}', 
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: '{i18n>GeneralData}',
                 Target: '@UI.FieldGroup#GeneralData'
             },
-            {    
-                $Type: 'UI.ReferenceFacet', 
-                Label: '{i18n>address}', 
-                Target: 'address/@UI.Identification'
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: '{i18n>address}',
+                Target: 'adress/@UI.Identification'
             },
-        ]    
+        ]
     }
 );
+
+annotate CustomerServiceDraft.AddressFiori with @(UI: {
+    Identification : [
+        {
+            $Type : 'UI.DataField',
+            Value : zipCode,
+            ![@UI.Importance] : #High
+        },        
+        {
+            $Type : 'UI.DataField',
+            Value : street,
+            ![@UI.Importance] : #High
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : number,
+            ![@UI.Importance] : #High
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : neighborhood,
+            ![@UI.Importance] : #High
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : city,
+            ![@UI.Importance] : #High
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : state,
+            ![@UI.Importance] : #High
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : country,
+            ![@UI.Importance] : #High
+        },
+    ],   
+});

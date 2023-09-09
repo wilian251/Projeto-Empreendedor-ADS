@@ -7,6 +7,7 @@
     "private": true,
     "dependencies": {
         "@cap-js/graphql": "^0.6.2",
+        "@cap-js/postgres": "^1.2.1",
         "@sap/cds": "^7.0.x",
         "@sap/cds-hana": "^2",
         "@sap/cds-odata-v2-adapter-proxy": "1.9.21",
@@ -14,6 +15,7 @@
         "@sap/xsenv": "3.4.0",
         "@sap/xssec": "3.2.17",
         "cds-swagger-ui-express": "^0.6.0",
+        "mbt": "^1.2.24",
         "express": "^4",
         "passport": "^0.6.0"
     },
@@ -53,7 +55,7 @@
                     "db",
                     "srv"
                 ],
-                "kind": "hana",
+                "kind": "hana-cloud",
                 "pool": {
                     "acquireTimeoutMillis": 600000,
                     "min": 0,

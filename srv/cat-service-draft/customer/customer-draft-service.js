@@ -1,13 +1,21 @@
-const cds   = require('@sap/cds');
-const xsenv = require("@sap/xsenv");
+const cds = require('@sap/cds');
 
 class CustomerServiceDraft extends cds.ApplicationService {
     init() {
-        
+
         //----------------------------------------------------------------------------------//
-        // INIT - Instanciando S3                                                           //
+        // CREATE - Customer                                                                   //
         //----------------------------------------------------------------------------------//
-        xsenv.loadEnv();
+        this.before('CREATE', 'CustomerFiori', async (req) => {
+
+        });
+
+        //----------------------------------------------------------------------------------//
+        // UPDATE - Customer                                                                   //
+        //----------------------------------------------------------------------------------//
+        this.before('UPDATE', 'CustomerFiori', async (req) => {
+
+        });
 
         
         return super.init();

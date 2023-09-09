@@ -7,23 +7,23 @@ using OrdersServiceDraft from './orders-draft-service';
 annotate OrdersServiceDraft.OrdersFiori with @(
 	UI: {
         LineItem: [
-			{   
-                $Type: 'UI.DataField', 
+			{
+                $Type: 'UI.DataField',
                 Value: orderNumber,
                 ![@UI.Importance] : #High
             },
-            {   
-                $Type : 'UI.DataField', 
+            {
+                $Type : 'UI.DataField',
                 Value : orderDescription,
                 ![@UI.Importance] : #High
             },
-            {   
-                $Type : 'UI.DataField', 
+            {
+                $Type : 'UI.DataField',
                 Value : orderExpirationDate,
                 ![@UI.Importance] : #High
             },
-            {   
-                $Type : 'UI.DataField', 
+            {
+                $Type : 'UI.DataField',
                 Value : orderStatus,
                 ![@UI.Importance] : #High
             },
@@ -32,7 +32,7 @@ annotate OrdersServiceDraft.OrdersFiori with @(
             $Type     : 'UI.PresentationVariantType',
             SortOrder : [{Property : orderNumber}]
         },
-        SelectionFields: [ 
+        SelectionFields: [
             orderNumber,
             orderDescription,
             orderExpirationDate,
@@ -41,15 +41,15 @@ annotate OrdersServiceDraft.OrdersFiori with @(
 	},
     //Object Page
 	UI: {
-        HeaderInfo: {          
-            Title : { 
+        HeaderInfo: {
+            Title : {
                 Value: orderNumber
             },
             TypeName: '{i18n>Order}',
             TypeNamePlural: '{i18n>OrderItems}',
-            Description: { 
+            Description: {
                 Value: orderDescription
-            }, 
+            },
         },
 		HeaderFacets            : [
             {
@@ -76,8 +76,8 @@ annotate OrdersServiceDraft.OrdersFiori with @(
                 {
                     $Type : 'UI.DataField',
                     Value: orderStatus
-                }      
-			]                        
+                }
+			]
         },
         FieldGroup #Admin: {
             Data : [
@@ -101,17 +101,17 @@ annotate OrdersServiceDraft.OrdersFiori with @(
         },
         // Page Facets
 		Facets: [
-            {    
-                $Type: 'UI.ReferenceFacet', 
-                Label: '{i18n>GeneralData}', 
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: '{i18n>GeneralData}',
                 Target: '@UI.FieldGroup#GeneralData'
             },
-            {    
-                $Type: 'UI.ReferenceFacet', 
-                Label: '{i18n>orderItems}', 
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: '{i18n>orderItems}',
                 Target: 'orderItems/@UI.LineItem'
             },
-        ]    
+        ]
     }
 );
 
@@ -119,16 +119,16 @@ annotate OrdersServiceDraft.OrdersFiori with @(
 //------------------- Invoice Items  -------------------//
 //------------------------------------------------------//
 //------------------------------------------------------//
-annotate CatalogServiceDraft.OrderItemsFiori with @( 
+annotate OrdersServiceDraft.OrderItemsFiori with @(
    	UI: {
     	TextArrangement     : #TextOnly,
-        LineItem: [           
+        LineItem: [
 			{
                 $Type             : 'UI.DataField',
                 Value             : product_ID,
                 ![@UI.Importance] : #High
-            },            
-            {   
+            },
+            {
                 $Type             : 'UI.DataField',
                 Value             : itemQtd,
                 ![@UI.Importance] : #High
@@ -136,18 +136,18 @@ annotate CatalogServiceDraft.OrderItemsFiori with @(
 		]
     },
 // Object Header
-    UI: { 
-        HeaderInfo: {         
+    UI: {
+        HeaderInfo: {
             Title: {
                 $Type : 'UI.DataField',
                 Value : '{i18n>orderItems}'
-            },    
+            },
             TypeName       : '{i18n>item}',
             TypeNamePlural : '{i18n>items}',
             Description    : {
                 Value : '{i18n>orderItems}'
             }
-        },    
+        },
         FieldGroup #Details : {
             Data : [
                 {
@@ -159,12 +159,12 @@ annotate CatalogServiceDraft.OrderItemsFiori with @(
                     $Type : 'UI.DataField',
                     Value : item,
                     ![@UI.Importance] : #High
-                },  
+                },
                 {
                     $Type : 'UI.DataField',
                     Value : itemQtd,
                     ![@UI.Importance] : #High
-                }        
+                }
             ]
         },
         // Page Facets
@@ -182,5 +182,5 @@ annotate CatalogServiceDraft.OrderItemsFiori with @(
                 ]
             }
         ]
-    }  
+    }
 );
