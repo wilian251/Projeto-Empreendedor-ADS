@@ -7,6 +7,56 @@ using {
   User
 } from '@sap/cds/Common';
 
+//----------------------- Address ----------------------//
+//------------------------------------------------------//
+//------------------------------------------------------//
+//Aspect
+aspect Address {
+  zipCode: String not null;
+  street : String  not null;
+  number: Integer  not null;
+  neighborhood: String  not null;
+  city: String  not null;
+  state: String  not null;
+  country: String  not null;
+}
+
+//@cds.odata.valuelist
+//Annotation
+annotate Address with @(
+  title              : '{i18n>address}',
+  description        : '{i18n>address}'
+) {
+  zipCode @(
+    title       : '{i18n>zipCode}',
+    description : '{i18n>zipCode}',
+  );
+  street @(
+    title       : '{i18n>street}',
+    description : '{i18n>street}',
+  );
+  number @(
+    title       : '{i18n>number}',
+    description : '{i18n>number}',
+  );
+  neighborhood @(
+    title       : '{i18n>neighborhood}',
+    description : '{i18n>neighborhood}',
+  );
+  city @(
+    title       : '{i18n>city}',
+    description : '{i18n>city}',
+  );
+  state @(
+    title       : '{i18n>state}',
+    description : '{i18n>state}',
+  );
+  country @(
+    title       : '{i18n>country}',
+    description : '{i18n>country}',
+  );
+};
+
 
 namespace finalproject;
 
@@ -70,80 +120,11 @@ annotate Users with @(
   );
 };
 
-//----------------------- Address ----------------------//
-//------------------------------------------------------//
-//------------------------------------------------------//
-//Entity
-entity Address : cuid , managed {
-  zipCode: String not null;
-  street : String  not null;
-  number: Integer  not null;
-  neighborhood: String  not null;
-  city: String  not null;
-  state: String  not null;
-  country: String  not null;
-}
-
-@cds.odata.valuelist
-//Annotation
-annotate Address with @(
-  title              : '{i18n>address}',
-  description        : '{i18n>address}',
-  UI.TextArrangement : #TextOnly,
-  Common.SemanticKey : [zipCode],
-  UI.Identification  : [{
-    $Type : 'UI.DataField',
-    Value : zipCode
-  }]
-) {
-  ID @(
-        Core.Computed,
-        Common.Text : {
-            $value                 : zipCode,
-            ![@UI.TextArrangement] : #TextOnly
-        }
-  );
-  zipCode @(
-    title       : '{i18n>zipCode}',
-    description : '{i18n>zipCode}',
-    Common      : {
-        FieldControl             : #Mandatory
-    }
-  );
-  street @(
-    title       : '{i18n>street}',
-    description : '{i18n>street}',
-    Common      : {
-      FieldControl : #Mandatory
-    }
-  );
-  number @(
-    title       : '{i18n>number}',
-    description : '{i18n>number}',
-  );
-  neighborhood @(
-    title       : '{i18n>neighborhood}',
-    description : '{i18n>neighborhood}',
-  );
-  city @(
-    title       : '{i18n>city}',
-    description : '{i18n>city}',
-  );
-  state @(
-    title       : '{i18n>state}',
-    description : '{i18n>state}',
-  );
-  country @(
-    title       : '{i18n>country}',
-    description : '{i18n>country}',
-  );
-};
-
 //----------------------- CUSTOMERS  ---------------------//
 //------------------------------------------------------//
 //------------------------------------------------------//
 //Entity
-entity Customer : cuid , managed {
+entity Customer : cuid , managed, Address {
   CNPJ: Integer not null @mandatory;
   customerName : String not null;
   customerSurname: String not null;
