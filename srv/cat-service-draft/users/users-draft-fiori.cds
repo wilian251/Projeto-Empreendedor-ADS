@@ -23,7 +23,7 @@ annotate UsersServiceDraft.UsersFiori with @(UI: {
             },
             {   
                 $Type : 'UI.DataField', 
-                Value : userActive,
+                Value : userInactive,
                 ![@UI.Importance] : #High
             }
 		],
@@ -34,7 +34,7 @@ annotate UsersServiceDraft.UsersFiori with @(UI: {
         SelectionFields: [ 
             userEmail,
             userName,
-            userActive
+            userInactive
         ],
 	},
     //Object Page
@@ -81,19 +81,22 @@ annotate UsersServiceDraft.UsersFiori with @(UI: {
 			Data: [
                 {
                     $Type : 'UI.DataField',
-                    Value: userEmail
+                    Value: userEmail,
+                    ![@UI.Importance] : #High
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: userName
+                    Value: userName,
+                    ![@UI.Importance] : #High
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: userSurname
+                    Value: userSurname,
+                    ![@UI.Importance] : #High
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: userActive
+                    Value: userInactive
                 }              
 			]                        
         },

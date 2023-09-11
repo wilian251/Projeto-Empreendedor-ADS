@@ -15,10 +15,10 @@ namespace finalproject;
 //------------------------------------------------------//
 //Entity
 entity Users : cuid, managed {
-  userEmail : String;
-  userName : String;
-  userSurname : String;
-  userActive : Boolean;
+  userEmail : String not null @mandatory;
+  userName : String not null;
+  userSurname : String not null;
+  userInactive : Boolean;
 }
 
 
@@ -64,9 +64,9 @@ annotate Users with @(
     title       : '{i18n>surname}',
     description : '{i18n>surname}',
   );
-  userActive @(
-    title       : '{i18n>active}',
-    description : '{i18n>active}',
+  userInactive @(
+    title       : '{i18n>inactive}',
+    description : '{i18n>inactive}',
   );
 };
 
@@ -75,13 +75,13 @@ annotate Users with @(
 //------------------------------------------------------//
 //Entity
 entity Address : cuid , managed {
-  zipCode: String;
-  street : String;
-  number: Integer;
-  neighborhood: String;
-  city: String;
-  state: String;
-  country: String;
+  zipCode: String not null;
+  street : String  not null;
+  number: Integer  not null;
+  neighborhood: String  not null;
+  city: String  not null;
+  state: String  not null;
+  country: String  not null;
 }
 
 @cds.odata.valuelist
@@ -144,15 +144,15 @@ annotate Address with @(
 //------------------------------------------------------//
 //Entity
 entity Customer : cuid , managed {
-  customerName : String;
-  customerSurname: String;
-  company: String;
-  customerEmail: String;
-  telephone: String;
-  CNPJ: Integer;
-  customerSource: String;
-  customerType: String;
-  customerActive: Boolean;
+  CNPJ: Integer not null @mandatory;
+  customerName : String not null;
+  customerSurname: String not null;
+  company: String  not null;
+  customerEmail: String  not null;
+  telephone: String  not null;
+  customerSource: String not null;
+  customerType: String not null;
+  customerInactive: Boolean;
   adress: Association to one Address;
 }
 
@@ -213,9 +213,9 @@ annotate Customer with @(
     title       : '{i18n>customerSource}',
     description : '{i18n>customerSource}',
   );
-  customerActive @(
-    title       : '{i18n>active}',
-    description : '{i18n>active}',
+  customerInactive @(
+    title       : '{i18n>inactive}',
+    description : '{i18n>inactive}',
   );
   adress @(
     title       : '{i18n>adress}',
@@ -228,11 +228,11 @@ annotate Customer with @(
 //------------------------------------------------------//
 //Entity
 entity Products : cuid , managed {
-  code: Integer;
-  productName: String;
-  productDescription: String;
-  productValue: Decimal;
-  productActive: Boolean;
+  code: Integer not null @mandatory;
+  productName: String not null;
+  productDescription: String not null;
+  productValue: Decimal not null;
+  productInactive: Boolean not null default true;
 }
 
 @cds.odata.valuelist
@@ -276,9 +276,9 @@ annotate Products with @(
     title       : '{i18n>productValue}',
     description : '{i18n>productValue}',
   );
-  productActive @(
-    title       : '{i18n>active}',
-    description : '{i18n>active}',
+  productInactive @(
+    title       : '{i18n>inactive}',
+    description : '{i18n>inactive}',
   );
 };
 
@@ -287,10 +287,10 @@ annotate Products with @(
 //------------------------------------------------------//
 
 entity Orders : cuid, managed {
-  orderNumber: Integer;
-  orderDescription : String;
-  orderExpirationDate: Date;
-  orderStatus: Integer;
+  orderNumber: Integer not null @mandatory;
+  orderDescription : String not null;
+  orderExpirationDate: Date not null;
+  orderStatus: Integer not null;
   orderItems: Composition of many OrderItems on orderItems.order = $self;
 }
 
@@ -349,8 +349,8 @@ annotate Orders with @(
 //------------------------------------------------------//
 
 entity OrderItems : cuid, managed {
-  item: Integer;
-  itemQtd: Integer;
+  item: Integer not null @mandatory;
+  itemQtd: Integer not null;
   order: Association to Orders;
   product: Association to Products;
 }
@@ -459,12 +459,12 @@ annotate OrderItems with @(
 //------------------------------------------------------//
 
 entity Proposal : cuid, managed {
-  proposalNumber: Integer;
-  proposalTitle: String;
-  proposalExpirationDate: Date;
-  proposalStatus: Integer;
+  proposalNumber: Integer not null @mandatory;
+  proposalTitle: String not null;
+  proposalExpirationDate: Date not null;
+  proposalStatus: Integer not null;
   customer: Association to one Customer;
-  ///order: Association to Orders;
+  order: Association to one Orders;
 }
 
 @cds.odata.valuelist

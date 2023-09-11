@@ -28,7 +28,7 @@ annotate CustomerServiceDraft.CustomerFiori with @(UI: {
             },
             {
                 $Type : 'UI.DataField',
-                Value : customerActive,
+                Value : customerInactive,
                 ![@UI.Importance] : #High
             }
         ],
@@ -115,7 +115,7 @@ annotate CustomerServiceDraft.CustomerFiori with @(UI: {
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: customerActive
+                    Value: customerInactive
                 }
 			]
         },

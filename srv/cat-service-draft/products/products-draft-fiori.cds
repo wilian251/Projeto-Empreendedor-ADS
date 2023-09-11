@@ -28,7 +28,7 @@ annotate ProductsServiceDraft.ProductsFiori with @(UI: {
             },
             {   
                 $Type : 'UI.DataField', 
-                Value : productActive,
+                Value : productInactive,
                 ![@UI.Importance] : #High
             }
 		],
@@ -40,7 +40,7 @@ annotate ProductsServiceDraft.ProductsFiori with @(UI: {
             code,
             productName,
             productDescription,
-            productActive
+            productInactive
         ],
 	},
     //Object Page
@@ -99,7 +99,7 @@ annotate ProductsServiceDraft.ProductsFiori with @(UI: {
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: productActive
+                    Value: productInactive
                 }              
 			]                        
         },
