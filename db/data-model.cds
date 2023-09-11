@@ -134,7 +134,6 @@ entity Customer : cuid , managed, Address {
   customerSource: String not null;
   customerType: String not null;
   customerInactive: Boolean;
-  adress: Association to one Address;
 }
 
 
@@ -197,10 +196,6 @@ annotate Customer with @(
   customerInactive @(
     title       : '{i18n>inactive}',
     description : '{i18n>inactive}',
-  );
-  adress @(
-    title       : '{i18n>adress}',
-    description : '{i18n>adress}',
   );
 };
 
