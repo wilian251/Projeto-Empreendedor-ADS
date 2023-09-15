@@ -87,31 +87,43 @@ annotate CustomerServiceDraft.CustomerFiori with @(UI: {
 			Data: [
                 {
                     $Type : 'UI.DataField',
-                    Value: company
+                    Value: CNPJ,
+                    ![@Common.FieldControl] : #Mandatory,
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: customerName
+                    Value: company,
+                    ![@Common.FieldControl] : #Mandatory,
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: customerSurname
+                    Value: customerName,
+                    ![@Common.FieldControl] : #Mandatory,
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: customerEmail
+                    Value: customerSurname,
+                    ![@Common.FieldControl] : #Mandatory,
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: telephone
+                    Value: customerEmail,
+                    ![@Common.FieldControl] : #Mandatory,
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: customerSource
+                    Value: telephone,
+                    ![@Common.FieldControl] : #Mandatory,
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: customerType
+                    Value: customerSource,
+                    ![@Common.FieldControl] : #Mandatory,
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: customerType,
+                    ![@Common.FieldControl] : #Mandatory,
                 },
                 {
                     $Type : 'UI.DataField',
@@ -119,6 +131,47 @@ annotate CustomerServiceDraft.CustomerFiori with @(UI: {
                 }
 			]
         },
+        FieldGroup #Address: {
+            $Type : 'UI.FieldGroupType',
+			Data: [
+                {
+                    $Type : 'UI.DataField',
+                    Value: zipCode,
+                    ![@Common.FieldControl] : #Mandatory,
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: street,
+                    ![@Common.FieldControl] : #Mandatory,
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: number,
+                    ![@Common.FieldControl] : #Mandatory,
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: neighborhood,
+                    ![@Common.FieldControl] : #Mandatory,
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: city,
+                    ![@Common.FieldControl] : #Mandatory,
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: state,
+                    ![@Common.FieldControl] : #Mandatory,
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value: country,
+                    ![@Common.FieldControl] : #Mandatory,
+                }
+			]
+        },
+
         // Page Facets
 		Facets: [
             {
@@ -129,48 +182,8 @@ annotate CustomerServiceDraft.CustomerFiori with @(UI: {
             {
                 $Type: 'UI.ReferenceFacet',
                 Label: '{i18n>address}',
-                Target: 'adress/@UI.Identification'
+                Target: '@UI.FieldGroup#Address'
             },
         ]
     }
 );
-
-annotate CustomerServiceDraft.AddressFiori with @(UI: {
-    Identification : [
-        {
-            $Type : 'UI.DataField',
-            Value : zipCode,
-            ![@UI.Importance] : #High
-        },        
-        {
-            $Type : 'UI.DataField',
-            Value : street,
-            ![@UI.Importance] : #High
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : number,
-            ![@UI.Importance] : #High
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : neighborhood,
-            ![@UI.Importance] : #High
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : city,
-            ![@UI.Importance] : #High
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : state,
-            ![@UI.Importance] : #High
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : country,
-            ![@UI.Importance] : #High
-        },
-    ],   
-});

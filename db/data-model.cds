@@ -7,56 +7,7 @@ using {
   User
 } from '@sap/cds/Common';
 
-//----------------------- Address ----------------------//
-//------------------------------------------------------//
-//------------------------------------------------------//
-//Aspect
-aspect Address {
-  zipCode: String not null;
-  street : String  not null;
-  number: Integer  not null;
-  neighborhood: String  not null;
-  city: String  not null;
-  state: String  not null;
-  country: String  not null;
-}
-
-//@cds.odata.valuelist
-//Annotation
-annotate Address with @(
-  title              : '{i18n>address}',
-  description        : '{i18n>address}'
-) {
-  zipCode @(
-    title       : '{i18n>zipCode}',
-    description : '{i18n>zipCode}',
-  );
-  street @(
-    title       : '{i18n>street}',
-    description : '{i18n>street}',
-  );
-  number @(
-    title       : '{i18n>number}',
-    description : '{i18n>number}',
-  );
-  neighborhood @(
-    title       : '{i18n>neighborhood}',
-    description : '{i18n>neighborhood}',
-  );
-  city @(
-    title       : '{i18n>city}',
-    description : '{i18n>city}',
-  );
-  state @(
-    title       : '{i18n>state}',
-    description : '{i18n>state}',
-  );
-  country @(
-    title       : '{i18n>country}',
-    description : '{i18n>country}',
-  );
-};
-
+using { common_models.Address as Address } from './common-models';
 
 namespace finalproject;
 
@@ -126,7 +77,7 @@ annotate Users with @(
 //Entity
 entity Customer : cuid , managed, Address {
   CNPJ: Integer not null @mandatory;
-  customerName : String not null;
+  customerName : String not null @mandatory;
   customerSurname: String not null;
   company: String  not null;
   customerEmail: String  not null;
@@ -192,6 +143,10 @@ annotate Customer with @(
   customerSource @(
     title       : '{i18n>customerSource}',
     description : '{i18n>customerSource}',
+  );
+  customerType @(
+    title       : '{i18n>customerType}',
+    description : '{i18n>customerType}',
   );
   customerInactive @(
     title       : '{i18n>inactive}',
