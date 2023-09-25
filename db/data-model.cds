@@ -76,7 +76,7 @@ annotate Users with @(
 //------------------------------------------------------//
 //Entity
 entity Customer : cuid , managed, Address {
-  CNPJ: Integer not null @mandatory;
+  CNPJ: String  not null @mandatory;
   customerName : String not null @mandatory;
   customerSurname: String not null;
   company: String  not null;
@@ -159,7 +159,7 @@ annotate Customer with @(
 //------------------------------------------------------//
 //Entity
 entity Products : cuid , managed {
-  code: Integer not null @mandatory;
+  code: String not null @mandatory;
   productName: String not null;
   productDescription: String not null;
   productValue: Decimal not null;
@@ -218,10 +218,10 @@ annotate Products with @(
 //------------------------------------------------------//
 
 entity Orders : cuid, managed {
-  orderNumber: Integer not null @mandatory;
+  orderNumber: String not null @mandatory;
   orderDescription : String not null;
   orderExpirationDate: Date not null;
-  orderStatus: Integer not null;
+  orderStatus: String not null;
   orderItems: Composition of many OrderItems on orderItems.order = $self;
 }
 
@@ -280,8 +280,8 @@ annotate Orders with @(
 //------------------------------------------------------//
 
 entity OrderItems : cuid, managed {
-  item: Integer not null @mandatory;
-  itemQtd: Integer not null;
+  item: String not null @mandatory;
+  itemQtd: String not null;
   order: Association to Orders;
   product: Association to Products;
 }
@@ -390,10 +390,10 @@ annotate OrderItems with @(
 //------------------------------------------------------//
 
 entity Proposal : cuid, managed {
-  proposalNumber: Integer not null @mandatory;
+  proposalNumber: String not null @mandatory;
   proposalTitle: String not null;
   proposalExpirationDate: Date not null;
-  proposalStatus: Integer not null;
+  proposalStatus: String not null;
   customer: Association to one Customer;
   order: Association to one Orders;
 }

@@ -133,6 +133,11 @@ annotate OrdersServiceDraft.OrderItemsFiori with @(
                 Value             : itemQtd,
                 ![@UI.Importance] : #High
             },
+            {
+                $Type             : 'UI.DataField',
+                Value             : itemQtd,
+                ![@UI.Importance] : #High
+            },
 		]
     },
 // Object Header

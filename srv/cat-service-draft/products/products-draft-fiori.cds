@@ -87,6 +87,10 @@ annotate ProductsServiceDraft.ProductsFiori with @(UI: {
 			Data: [
                 {
                     $Type : 'UI.DataField',
+                    Value: code
+                },
+                {
+                    $Type : 'UI.DataField',
                     Value: productName
                 },
                 {
