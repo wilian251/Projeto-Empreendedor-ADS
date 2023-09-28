@@ -130,7 +130,7 @@ annotate OrdersServiceDraft.OrderItemsFiori with @(
             },
             {
                 $Type             : 'UI.DataField',
-                Value             : itemQtd,
+                Value             : item,
                 ![@UI.Importance] : #High
             },
             {

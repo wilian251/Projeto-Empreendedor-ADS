@@ -282,8 +282,8 @@ annotate Orders with @(
 entity OrderItems : cuid, managed {
   item: String not null @mandatory;
   itemQtd: String not null;
-  order: Association to Orders;
-  product: Association to Products;
+  order: Association to Orders @readonly;
+  product: Composition of one Products;
 }
 
 @cds.odata.valuelist
@@ -292,23 +292,23 @@ annotate OrderItems with @(
   title              : '{i18n>orderItems}',
   description        : '{i18n>orderItems}',
   UI.TextArrangement : #TextOnly,
-  Common.SemanticKey : [order.orderNumber, product.productName],
+  Common.SemanticKey : [order.orderNumber, product.code],
   UI.Identification  : [{
     $Type : 'UI.DataField',
     Value : order.orderNumber
   },
   {
     $Type : 'UI.DataField',
-    Value : product.productName
+    Value : product.code
   },
   ]
 ) {
   ID @(
-        Core.Computed,
-        Common.Text : {
-            $value                 : order.orderNumber,
-            ![@UI.TextArrangement] : #TextOnly
-        }
+    Core.Computed,
+    Common.Text : {
+        $value                 : order.orderNumber,
+        ![@UI.TextArrangement] : #TextOnly
+    }
   );
   order @(
     title       : '{i18n>order}',
@@ -316,29 +316,29 @@ annotate OrderItems with @(
     Common      : {
         FieldControl             : #Mandatory,
         Text      : {
-                $value                 : order.orderNumber,
-                ![@UI.TextArrangement] : #TextOnly
+          $value                 : order.orderNumber,
+          ![@UI.TextArrangement] : #TextOnly
+        },
+        ValueList                : {
+          CollectionPath : 'Orders',
+          SearchSupported: true,
+          Parameters     : [
+            {
+                $Type             : 'Common.ValueListParameterInOut',
+                LocalDataProperty : 'order_ID',
+                ValueListProperty : 'ID'
             },
-          ValueList                : {
-              CollectionPath : 'Orders',
-              SearchSupported: true,
-              Parameters     : [
-                {
-                    $Type             : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : 'order_ID',
-                    ValueListProperty : 'ID'
-                },
-                {
-                    $Type             : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'orderNumber',
+            {
+                $Type             : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty : 'orderNumber',
 
-                },
-                {
-                    $Type             : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'orderDescription'
-                }
-              ]
-          }
+            },
+            {
+                $Type             : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty : 'orderDescription'
+            }
+          ]
+      }
     }
   );
   product @(
@@ -347,7 +347,7 @@ annotate OrderItems with @(
     Common      : {
       FieldControl : #Mandatory,
       Text      : {
-        $value                 : product.productName,
+        $value                 : product.code,
         ![@UI.TextArrangement] : #TextOnly
       },
       ValueList                : {
@@ -361,8 +361,11 @@ annotate OrderItems with @(
           },
           {
               $Type             : 'Common.ValueListParameterDisplayOnly',
+              ValueListProperty : 'code',
+          },
+          {
+              $Type             : 'Common.ValueListParameterDisplayOnly',
               ValueListProperty : 'productName',
-
           },
           {
               $Type             : 'Common.ValueListParameterDisplayOnly',
@@ -394,8 +397,8 @@ entity Proposal : cuid, managed {
   proposalTitle: String not null;
   proposalExpirationDate: Date not null;
   proposalStatus: String not null;
-  customer: Association to one Customer;
-  order: Association to one Orders;
+  customer: Composition of many Customer;
+  order: Composition of one Orders;
 }
 
 @cds.odata.valuelist
