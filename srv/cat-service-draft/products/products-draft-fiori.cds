@@ -8,7 +8,7 @@ annotate ProductsServiceDraft.ProductsFiori with @(UI: {
         LineItem: [
             {   
                 $Type: 'UI.DataField', 
-                Value: code,
+                Value: productCode,
                 ![@UI.Importance] : #High
             },
 			{   
@@ -34,10 +34,10 @@ annotate ProductsServiceDraft.ProductsFiori with @(UI: {
 		],
         PresentationVariant : {
             $Type     : 'UI.PresentationVariantType',
-            SortOrder : [{Property : code}]
+            SortOrder : [{Property : productCode}]
         },
         SelectionFields: [ 
-            code,
+            productCode,
             productName,
             productDescription,
             productInactive
@@ -47,7 +47,7 @@ annotate ProductsServiceDraft.ProductsFiori with @(UI: {
 	UI: {
         HeaderInfo: {          
             Title : { 
-                Value: code
+                Value: productCode
             },
             TypeName: '{i18n>Product}',
             TypeNamePlural: '{i18n>Products}',
@@ -87,7 +87,7 @@ annotate ProductsServiceDraft.ProductsFiori with @(UI: {
 			Data: [
                 {
                     $Type : 'UI.DataField',
-                    Value: code
+                    Value: productCode
                 },
                 {
                     $Type : 'UI.DataField',

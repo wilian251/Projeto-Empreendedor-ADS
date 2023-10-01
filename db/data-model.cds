@@ -159,7 +159,7 @@ annotate Customer with @(
 //------------------------------------------------------//
 //Entity
 entity Products : cuid , managed {
-  code: String not null @mandatory;
+  productCode: String not null @mandatory;
   productName: String not null;
   productDescription: String not null;
   productValue: Decimal not null;
@@ -172,20 +172,20 @@ annotate Products with @(
   title              : '{i18n>products}',
   description        : '{i18n>products}',
   UI.TextArrangement : #TextOnly,
-  Common.SemanticKey : [code],
+  Common.SemanticKey : [productCode],
   UI.Identification  : [{
     $Type : 'UI.DataField',
-    Value : code
+    Value : productCode
   }]
 ) {
   ID @(
         Core.Computed,
         Common.Text : {
-            $value                 : code,
+            $value                 : productCode,
             ![@UI.TextArrangement] : #TextOnly
         }
   );
-  code @(
+  productCode @(
     title       : '{i18n>code}',
     description : '{i18n>code}',
     Common      : {
@@ -282,8 +282,9 @@ annotate Orders with @(
 entity OrderItems : cuid, managed {
   item: String not null @mandatory;
   itemQtd: String not null;
+  productCode: String not null;
   order: Association to Orders @readonly;
-  product: Composition of one Products;
+  product: Association to Products on product.productCode = productCode @readonly;
 }
 
 @cds.odata.valuelist
@@ -292,16 +293,11 @@ annotate OrderItems with @(
   title              : '{i18n>orderItems}',
   description        : '{i18n>orderItems}',
   UI.TextArrangement : #TextOnly,
-  Common.SemanticKey : [order.orderNumber, product.code],
+  Common.SemanticKey : [order.orderNumber],
   UI.Identification  : [{
     $Type : 'UI.DataField',
     Value : order.orderNumber
-  },
-  {
-    $Type : 'UI.DataField',
-    Value : product.code
-  },
-  ]
+  }]
 ) {
   ID @(
     Core.Computed,
@@ -341,13 +337,13 @@ annotate OrderItems with @(
       }
     }
   );
-  product @(
+  productCode @(
     title       : '{i18n>product}',
     description : '{i18n>product}',
     Common      : {
       FieldControl : #Mandatory,
       Text      : {
-        $value                 : product.code,
+        $value                 : productCode,
         ![@UI.TextArrangement] : #TextOnly
       },
       ValueList                : {
@@ -355,21 +351,17 @@ annotate OrderItems with @(
         SearchSupported: true,
         Parameters     : [
           {
-              $Type             : 'Common.ValueListParameterInOut',
-              LocalDataProperty : 'product_ID',
-              ValueListProperty : 'ID'
+            $Type             : 'Common.ValueListParameterInOut',
+            LocalDataProperty : 'productCode',
+            ValueListProperty : 'productCode'
           },
           {
-              $Type             : 'Common.ValueListParameterDisplayOnly',
-              ValueListProperty : 'code',
+            $Type             : 'Common.ValueListParameterDisplayOnly',
+            ValueListProperty : 'productName',
           },
           {
-              $Type             : 'Common.ValueListParameterDisplayOnly',
-              ValueListProperty : 'productName',
-          },
-          {
-              $Type             : 'Common.ValueListParameterDisplayOnly',
-              ValueListProperty : 'productDescription'
+            $Type             : 'Common.ValueListParameterDisplayOnly',
+            ValueListProperty : 'productDescription'
           }
         ]
       }
