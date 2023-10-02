@@ -125,7 +125,7 @@ annotate OrdersServiceDraft.OrderItemsFiori with @(
         LineItem: [
 			{
                 $Type             : 'UI.DataField',
-                Value             : productCode,
+                Value             : itemProductCode,
                 ![@UI.Importance] : #High
             },
             {
@@ -157,7 +157,7 @@ annotate OrdersServiceDraft.OrderItemsFiori with @(
             Data : [
                 {
                     $Type : 'UI.DataField',
-                    Value : productCode,
+                    Value : itemProductCode,
                     ![@UI.Importance] : #High
                 },
                 {

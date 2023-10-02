@@ -6,5 +6,5 @@ service OrdersServiceDraft {// @( requires:'authenticated-user') {
     @Capabilities : { Readable, Insertable, Updatable, Deletable }
     entity OrderItemsFiori as projection on finalproject.OrderItems;
 
-    entity ProductsFiori as projection on finalproject.Products;
+    entity Products as projection on finalproject.Products where productInactive = false;
 }

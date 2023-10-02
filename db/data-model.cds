@@ -19,7 +19,7 @@ entity Users : cuid, managed {
   userEmail : String not null @mandatory;
   userName : String not null;
   userSurname : String not null;
-  userInactive : Boolean;
+  userInactive : Boolean default false;
 }
 
 
@@ -84,7 +84,7 @@ entity Customer : cuid , managed, Address {
   telephone: String  not null;
   customerSource: String not null;
   customerType: String not null;
-  customerInactive: Boolean;
+  customerInactive: Boolean default false;
 }
 
 
@@ -163,7 +163,7 @@ entity Products : cuid , managed {
   productName: String not null;
   productDescription: String not null;
   productValue: Decimal not null;
-  productInactive: Boolean not null default true;
+  productInactive: Boolean not null default false;
 }
 
 @cds.odata.valuelist
@@ -282,9 +282,9 @@ annotate Orders with @(
 entity OrderItems : cuid, managed {
   item: String not null @mandatory;
   itemQtd: String not null;
-  productCode: String not null;
+  itemProductCode: String not null;
   order: Association to Orders @readonly;
-  product: Association to Products on product.productCode = productCode @readonly;
+  product: Association to Products @readonly;
 }
 
 @cds.odata.valuelist
@@ -302,57 +302,53 @@ annotate OrderItems with @(
   ID @(
     Core.Computed,
     Common.Text : {
-        $value                 : order.orderNumber,
-        ![@UI.TextArrangement] : #TextOnly
+      $value                 : order.orderNumber,
+      ![@UI.TextArrangement] : #TextOnly
     }
   );
   order @(
     title       : '{i18n>order}',
     description : '{i18n>order}',
     Common      : {
-        FieldControl             : #Mandatory,
-        Text      : {
-          $value                 : order.orderNumber,
-          ![@UI.TextArrangement] : #TextOnly
-        },
-        ValueList                : {
-          CollectionPath : 'Orders',
-          SearchSupported: true,
-          Parameters     : [
-            {
-                $Type             : 'Common.ValueListParameterInOut',
-                LocalDataProperty : 'order_ID',
-                ValueListProperty : 'ID'
-            },
-            {
-                $Type             : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'orderNumber',
-
-            },
-            {
-                $Type             : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'orderDescription'
-            }
-          ]
-      }
-    }
-  );
-  productCode @(
-    title       : '{i18n>product}',
-    description : '{i18n>product}',
-    Common      : {
-      FieldControl : #Mandatory,
+      FieldControl             : #Mandatory,
       Text      : {
-        $value                 : productCode,
+        $value                 : order.orderNumber,
         ![@UI.TextArrangement] : #TextOnly
       },
       ValueList                : {
+        CollectionPath : 'Orders',
+        SearchSupported: true,
+        Parameters     : [
+          {
+              $Type             : 'Common.ValueListParameterInOut',
+              LocalDataProperty : 'order_ID',
+              ValueListProperty : 'ID'
+          },
+          {
+              $Type             : 'Common.ValueListParameterDisplayOnly',
+              ValueListProperty : 'orderNumber',
+
+          },
+          {
+              $Type             : 'Common.ValueListParameterDisplayOnly',
+              ValueListProperty : 'orderDescription'
+          }
+        ]
+      }
+    }
+  );
+  itemProductCode @(
+    title       : '{i18n>product}',
+    description : '{i18n>product}',
+    Common      : {
+      ValueList        : {
+        $Type : 'Common.ValueListType',
         CollectionPath : 'Products',
         SearchSupported: true,
         Parameters     : [
           {
             $Type             : 'Common.ValueListParameterInOut',
-            LocalDataProperty : 'productCode',
+            LocalDataProperty : 'itemProductCode',
             ValueListProperty : 'productCode'
           },
           {
@@ -365,7 +361,7 @@ annotate OrderItems with @(
           }
         ]
       }
-    } 
+    }
   );
   item @(
     title       : '{i18n>item}',
@@ -390,7 +386,8 @@ entity Proposal : cuid, managed {
   proposalExpirationDate: Date not null;
   proposalStatus: String not null;
   customer: Composition of many Customer;
-  order: Composition of one Orders;
+  order: Association to one Orders;
+  proposalItems: Composition of many ProposalItems on proposalItems.proposal = $self
 }
 
 @cds.odata.valuelist
@@ -478,6 +475,7 @@ annotate Proposal with @(
           ![@UI.TextArrangement] : #TextOnly
       },
       ValueList                : {
+          $Type : 'Common.ValueListType',
           CollectionPath : 'Orders',
           SearchSupported: true,
           Parameters     : [
@@ -497,6 +495,75 @@ annotate Proposal with @(
             }
           ]
       }
+    }
+  );
+};
+
+//--------------- Proposal Items -----------------------//
+//------------------------------------------------------//
+//------------------------------------------------------//
+
+entity ProposalItems : cuid, managed {
+  proposalItemNumber: String not null @mandatory;
+  proposalItemQtd: String not null;
+  proposalItemValue: Decimal not null;
+  proposal: Association to Proposal @readonly;
+}
+
+@cds.odata.valuelist
+//Annotation
+annotate ProposalItems with @(
+  title              : '{i18n>orderItems}',
+  description        : '{i18n>orderItems}',
+  UI.TextArrangement : #TextOnly,
+  Common.SemanticKey : [proposalItemNumber],
+  UI.Identification  : [{
+    $Type : 'UI.DataField',
+    Value : proposalItemNumber
+  }]
+) {
+  ID @(
+    Core.Computed,
+    Common.Text : {
+        $value                 : proposalItemNumber,
+        ![@UI.TextArrangement] : #TextOnly
+    }
+  );
+  proposalItemNumber @(
+    title       : '{i18n>item}',
+    description : '{i18n>item}',
+    Common : {
+      FieldControl : #Mandatory,
+    }
+  );
+  proposalItemQtd @(
+    title       : '{i18n>itemQtd}',
+    description : '{i18n>itemQtd}',
+  );
+  proposalItemValue @(
+    title       : '{i18n>itemValue}',
+    description : '{i18n>itemValue}',
+  );
+  proposal @(
+    title: '{i18n>proposal}',
+    description: '{i18n>proposal}',
+    Common : {
+      ValueList : {
+          $Type : 'Common.ValueListType',
+          CollectionPath : 'Proposal',
+          SearchSupported,
+          Parameters : [
+              {
+                $Type : 'Common.ValueListParameterInOut',
+                LocalDataProperty : proposal_ID,
+                ValueListProperty : 'ID'
+              },
+              {
+                $Type : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty : 'proposalTitle',
+              }
+          ],
+      },
     }
   );
 };
