@@ -284,7 +284,7 @@ entity OrderItems : cuid, managed {
   itemQtd: String not null;
   itemProductCode: String not null;
   order: Association to Orders @readonly;
-  product: Association to Products @readonly;
+  product: Association to Products on product.productCode = itemProductCode @readonly;
 }
 
 @cds.odata.valuelist

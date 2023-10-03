@@ -1,5 +1,5 @@
 {
-    "_version": "1.49.0",
+    "_version": "1.32.0",
     "sap.app": {
         "id": "finalproject.app.proposal",
         "type": "application",
@@ -9,38 +9,37 @@
         },
         "title": "{{appTitle}}",
         "description": "{{appDescription}}",
-        "resources": "resources.json",
         "dataSources": {
             "mainService": {
-                "uri": "/odata/v2/catalog/",
+                "uri": "/v2/odata/v4/catalog/",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
                     "localUri": "localService/metadata.xml",
-                    "odataVersion": "4.0"
+                    "odataVersion": "2.0"
                 }
             }
         },
         "crossNavigation": {
             "inbounds": {
-                "finalproject-app-proposal-inbound": {
+                "capdemowm-app-cargoreceipt-inbound": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "finalproject",
-                    "action": "PROPOSAL",
+                    "semanticObject": "cargoreceipt",
+                    "action": "create",
                     "title": "{{flpTitle}}",
                     "subTitle": "{{flpSubtitle}}",
-                    "icon": "sap-icon://employee"
+                    "icon": "sap-icon://SAP-icons-TNT/process-package"
                 }
             }
         }
     },
     "sap.cloud": {
-        "service": "finalproject",
+        "service": "capdemowm",
         "public": true
-    },
+    }, 
     "sap.ui": {
         "technology": "UI5",
         "icons": {
@@ -60,12 +59,11 @@
     "sap.ui5": {
         "flexEnabled": true,
         "dependencies": {
-            "minUI5Version": "1.116.0",
+            "minUI5Version": "1.97.2",
             "libs": {
-                "sap.m": {},
                 "sap.ui.core": {},
-                "sap.ushell": {},
-                "sap.fe.templates": {}
+                "sap.m": {},
+                "sap.f": {}
             }
         },
         "contentDensities": {
@@ -80,6 +78,9 @@
                 }
             },
             "appView": {
+                "type": "sap.ui.model.json.JSONModel"
+            },
+            "newObject": {
                 "type": "sap.ui.model.json.JSONModel"
             },
             "": {
@@ -117,15 +118,47 @@
                 {
                     "pattern": "",
                     "name": "main",
-                    "target": "main"
+                    "target": [
+                        "main"
+                    ]
+                },
+                {
+                    "pattern": "CargoReceipt/{objectId}",
+                    "name": "object",
+                    "target": [
+                        "object"
+                    ]
+                },
+                {
+                    "pattern": "NewObject",
+                    "name": "newObject",
+                    "target": [
+                        "newObject"
+                    ]
                 }
             ],
             "targets": {
                 "main": {
-                    "viewName": "main",
+                    "viewName": "Main",
                     "viewId": "main",
                     "viewLevel": 1,
                     "title": "{i18n>mainViewTitle}"
+                },
+                "object": {
+                    "viewName": "Object",
+                    "viewId": "object",
+                    "viewLevel": 2,
+                    "title": "{i18n>objectViewTitle}"
+                },
+                "newObject": {
+                    "viewName": "NewObject",
+                    "viewId": "newObject",
+                    "viewLevel": 2,
+                    "title": "{i18n>objectViewTitle}"
+                },
+                "objectNotFound": {
+                    "viewName": "ObjectNotFound",
+                    "viewId": "objectNotFound"
                 },
                 "notFound": {
                     "viewName": "NotFound",

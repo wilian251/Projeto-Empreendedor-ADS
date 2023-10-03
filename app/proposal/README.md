@@ -8,17 +8,17 @@
 |**Template Used**<br>List Report Page V4|
 |**Service Type**<br>Local Cap|
 |**Service URL**<br>http://localhost:4004/odata/v4/catalog-service-draft/
-|**Module Name**<br>products|
-|**Application Title**<br>Products|
+|**Module Name**<br>proposal|
+|**Application Title**<br>proposal|
 |**Namespace**<br>finalproject.app|
 |**UI5 Theme**<br>sap_horizon|
 |**UI5 Version**<br>1.116.0|
 |**Enable Code Assist Libraries**<br>False|
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|
-|**Main Entity**<br>ProductsFiori|
+|**Main Entity**<br>proposalFiori|
 
-## products
+## proposal
 
 A Fiori application.
 

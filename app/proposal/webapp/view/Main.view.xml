@@ -3,6 +3,41 @@
     displayBlock="true"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
 >
-    
+    <NavContainer id="idNavContainer">
+        <pages>
+            <Page id="idPage">
+                <content>
+                    <VBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar 
+                            id="idSmartFilterBar" 
+                            entitySet="Orders" 
+                            persistencyKey="SmartFilter_Explored"
+                            enableBasicSearch="true"
+                        >
+                            <smartFilterBar:layoutData>
+                                <FlexItemData shrinkFactor="0"/>
+                            </smartFilterBar:layoutData>
+                        </smartFilterBar:SmartFilterBar>
+                        <smartTable:SmartTable 
+                            id="idSmartTable" 
+                            entitySet="Orders" 
+                            smartFilterId="idSmartFilterBar" 
+                            tableType="Table"
+                            header="{i18n>orders}"
+                            persistencyKey="SmartTableAnalytical_Explored" 
+                            enableAutoBinding="true" 
+                            class="sapUiResponsiveContentPadding"
+                        >
+                            <smartTable:layoutData>
+                                <FlexItemData growFactor="1" baseSize="0%"/>
+                            </smartTable:layoutData>
+                        </smartTable:SmartTable>
+                    </VBox>
+                </content>
+            </Page>
+        </pages>
+    </NavContainer>    
 </mvc:View>
