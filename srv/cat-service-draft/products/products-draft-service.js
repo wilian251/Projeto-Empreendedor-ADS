@@ -5,7 +5,7 @@ class ProductsServiceDraft extends cds.ApplicationService {
     init() {
 
         //----------------------------------------------------------------------------------//
-        // CREATE - Products                                                                   //
+        // CREATE - Products                                                                //
         //----------------------------------------------------------------------------------//
         this.before('CREATE', 'ProductsFiori', async (req) => {
             const tx   = cds.transaction(req);
@@ -27,7 +27,7 @@ class ProductsServiceDraft extends cds.ApplicationService {
         });
 
         //----------------------------------------------------------------------------------//
-        // UPDATE - Products                                                                   //
+        // UPDATE - Products                                                                //
         //----------------------------------------------------------------------------------//
         this.before('UPDATE', 'ProductsFiori', async (req) => {
             let bundle = getBundle(req.user.locale);

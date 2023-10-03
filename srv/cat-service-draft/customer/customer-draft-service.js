@@ -5,7 +5,7 @@ class CustomerServiceDraft extends cds.ApplicationService {
     init() {
 
         //----------------------------------------------------------------------------------//
-        // CREATE - Customer                                                                   //
+        // CREATE - Customer                                                                //
         //----------------------------------------------------------------------------------//
         this.before('CREATE', 'CustomerFiori', async (req) => {
             const tx   = cds.transaction(req);
@@ -27,7 +27,7 @@ class CustomerServiceDraft extends cds.ApplicationService {
         });
 
         //----------------------------------------------------------------------------------//
-        // UPDATE - Customer                                                                   //
+        // UPDATE - Customer                                                                //
         //----------------------------------------------------------------------------------//
         this.before('UPDATE', 'CustomerFiori', async (req) => {
             const tx = cds.transaction(req);
