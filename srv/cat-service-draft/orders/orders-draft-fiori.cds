@@ -24,7 +24,7 @@ annotate OrdersServiceDraft.OrdersFiori with @(
             },
             {
                 $Type : 'UI.DataField',
-                Value : orderStatus,
+                Value : orderStatusNumber,
                 ![@UI.Importance] : #High
             },
 		],
@@ -36,7 +36,7 @@ annotate OrdersServiceDraft.OrdersFiori with @(
             orderNumber,
             orderDescription,
             orderExpirationDate,
-            orderStatus
+            orderStatusNumber
         ],
 	},
     //Object Page
@@ -75,7 +75,7 @@ annotate OrdersServiceDraft.OrdersFiori with @(
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: orderStatus
+                    Value: orderStatusNumber
                 }
 			]
         },

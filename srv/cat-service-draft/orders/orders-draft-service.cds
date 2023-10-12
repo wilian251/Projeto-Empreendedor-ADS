@@ -7,4 +7,5 @@ service OrdersServiceDraft {// @( requires:'authenticated-user') {
     entity OrderItemsFiori as projection on finalproject.OrderItems;
 
     entity Products as projection on finalproject.Products where productInactive = false;
+    entity Status as projection on finalproject.StatusOrder;
 }

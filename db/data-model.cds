@@ -11,6 +11,93 @@ using { common_models.Address as Address } from './common-models';
 
 namespace finalproject;
 
+//--------------- Status Customers ---------------------//
+//------------------------------------------------------//
+//------------------------------------------------------//
+entity StatusCustomer: cuid, managed {
+  customerStatusNumber: Integer not null @mandatory;
+  customerStatusDescription: String not null;
+}
+
+@cds.odata.valuelist
+annotate StatusCustomer with @(
+  title              : '{i18n>customerStatus}',
+  description        : '{i18n>customerStatus}',
+  UI.TextArrangement : #TextOnly,
+  Common.SemanticKey : [customerStatusNumber],
+  UI.Identification  : [{
+    $Type : 'UI.DataField',
+    Value : customerStatusNumber
+  }]
+) {
+  ID @(
+        Core.Computed,
+        Common.Text : {
+            $value                 : customerStatusDescription,
+            ![@UI.TextArrangement] : #TextOnly
+        }
+  );
+  customerStatusNumber            @(
+    title       : '{i18n>customerStatusNumber}',
+    description : '{i18n>customerStatusNumber}',
+    Common      : {
+        FieldControl             : #Mandatory,
+        Text : {
+          $value                 : customerStatusDescription,
+          ![@UI.TextArrangement] : #TextLast
+      }
+    }
+  );
+  customerStatusDescription @(
+    title       : '{i18n>customerStatusDescription}',
+    description : '{i18n>customerStatusDescription}',
+  );
+};
+
+
+//----------------- Status Orders ----------------------//
+//------------------------------------------------------//
+//------------------------------------------------------//
+entity StatusOrder: cuid, managed {
+  orderStatusNumber: Integer not null @mandatory;
+  orderStatusDescription: String not null;
+}
+
+@cds.odata.valuelist
+annotate StatusOrder with @(
+  title              : '{i18n>orderStatus}',
+  description        : '{i18n>orderStatus}',
+  UI.TextArrangement : #TextOnly,
+  Common.SemanticKey : [orderStatusNumber],
+  UI.Identification  : [{
+    $Type : 'UI.DataField',
+    Value : orderStatusNumber
+  }]
+) {
+  ID @(
+        Core.Computed,
+        Common.Text : {
+            $value                 : orderStatusDescription,
+            ![@UI.TextArrangement] : #TextOnly
+        }
+  );
+  orderStatusNumber            @(
+    title       : '{i18n>orderStatusNumber}',
+    description : '{i18n>orderStatusNumber}',
+    Common      : {
+        FieldControl             : #Mandatory,
+        Text : {
+          $value                 : orderStatusDescription,
+          ![@UI.TextArrangement] : #TextLast
+      }
+    }
+  );
+  orderStatusDescription @(
+    title       : '{i18n>orderStatusDescription}',
+    description : '{i18n>orderStatusDescription}',
+  );
+};
+
 //----------------------- Usuários ---------------------//
 //------------------------------------------------------//
 //------------------------------------------------------//
@@ -83,8 +170,9 @@ entity Customer : cuid , managed, Address {
   customerEmail: String  not null;
   telephone: String  not null;
   customerSource: String not null;
-  customerType: String not null;
+  customerType: Integer not null;
   customerInactive: Boolean default false;
+  customerStatus: Association to one StatusCustomer on customerStatus.customerStatusNumber = customerType;
 }
 
 
@@ -147,6 +235,24 @@ annotate Customer with @(
   customerType @(
     title       : '{i18n>customerType}',
     description : '{i18n>customerType}',
+    Common      : {
+      ValueList        : {
+        $Type : 'Common.ValueListType',
+        CollectionPath : 'Status',
+        SearchSupported: true,
+        Parameters     : [
+          {
+            $Type             : 'Common.ValueListParameterInOut',
+            LocalDataProperty : 'customerType',
+            ValueListProperty : 'customerStatusNumber'
+          },
+          {
+            $Type             : 'Common.ValueListParameterDisplayOnly',
+            ValueListProperty : 'customerStatusDescription'
+          }
+        ]
+      }
+    }
   );
   customerInactive @(
     title       : '{i18n>inactive}',
@@ -221,7 +327,8 @@ entity Orders : cuid, managed {
   orderNumber: String not null @mandatory;
   orderDescription : String not null;
   orderExpirationDate: Date not null;
-  orderStatus: String not null;
+  orderStatusNumber: Integer not null;
+  orderStatus: Association to one StatusOrder on orderStatus.orderStatusNumber = orderStatusNumber;
   orderItems: Composition of many OrderItems on orderItems.order = $self;
 }
 
@@ -265,9 +372,27 @@ annotate Orders with @(
       FieldControl : #Mandatory
     }
   );
-  orderStatus @(
+  orderStatusNumber @(
     title       : '{i18n>orderStatus}',
     description : '{i18n>orderStatus}',
+    Common      : {
+      ValueList        : {
+        $Type : 'Common.ValueListType',
+        CollectionPath : 'Status',
+        SearchSupported: true,
+        Parameters     : [
+          {
+            $Type             : 'Common.ValueListParameterInOut',
+            LocalDataProperty : 'orderStatusNumber',
+            ValueListProperty : 'orderStatusNumber'
+          },
+          {
+            $Type             : 'Common.ValueListParameterDisplayOnly',
+            ValueListProperty : 'orderStatusDescription'
+          }
+        ]
+      }
+    }
   );
   orderItems @(
     title       : '{i18n>orderItems}',
@@ -384,10 +509,11 @@ entity Proposal : cuid, managed {
   proposalNumber: String not null @mandatory;
   proposalTitle: String not null;
   proposalExpirationDate: Date not null;
-  proposalStatus: String not null;
+  proposalStatusNumber: Integer not null;
   customer: Composition of many Customer;
   order: Association to one Orders;
-  proposalItems: Composition of many ProposalItems on proposalItems.proposal = $self
+  proposalStatus: Association to one StatusOrder on proposalStatus.orderStatusNumber = proposalStatusNumber;
+  proposalItems: Composition of many ProposalItems on proposalItems.proposal = $self;
 }
 
 @cds.odata.valuelist
@@ -430,9 +556,27 @@ annotate Proposal with @(
     description : '{i18n>proposalExpirationDate}',
     Common : { FieldControl : #Mandatory, },
   );
-  proposalStatus @(
+  proposalStatusNumber @(
     title       : '{i18n>proposalStatus}',
-    description : '{i18n>proposalStatus}'
+    description : '{i18n>proposalStatus}',
+    Common      : {
+      ValueList        : {
+        $Type : 'Common.ValueListType',
+        CollectionPath : 'Status',
+        SearchSupported: true,
+        Parameters     : [
+          {
+            $Type             : 'Common.ValueListParameterInOut',
+            LocalDataProperty : 'proposalStatusNumber',
+            ValueListProperty : 'orderStatusNumber'
+          },
+          {
+            $Type             : 'Common.ValueListParameterDisplayOnly',
+            ValueListProperty : 'orderStatusDescription'
+          }
+        ]
+      }
+    }
   );
   customer @(
     title       : '{i18n>cutomer}',

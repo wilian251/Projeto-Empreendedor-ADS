@@ -1,9 +1,9 @@
 using finalproject from '../../db/data-model';
 
-@protocol: ['odata', 'rest', 'graphql']
+//@protocol: ['odata', 'rest', 'graphql']
 service CatalogService {// @( requires:'authenticated-user') {
     
-    @Capabilities : { Readable, Insertable, Updatable, Deletable }
+    @odata.draft.enabled
     entity Users as projection on finalproject.Users;
     @Capabilities : { Readable, Insertable, Updatable, Deletable }
     entity Products as projection on finalproject.Products;
@@ -15,4 +15,8 @@ service CatalogService {// @( requires:'authenticated-user') {
     entity OrderItems as projection on finalproject.OrderItems;
     @Capabilities : { Readable, Insertable, Updatable, Deletable }
     entity Proposal as projection on finalproject.Proposal;
+    @Capabilities : { Readable, Insertable, Updatable, Deletable }
+    entity StatusCustomer as projection on finalproject.StatusCustomer;
+    @Capabilities : { Readable, Insertable, Updatable, Deletable }
+    entity StatusOrder as projection on finalproject.StatusOrder;
 }

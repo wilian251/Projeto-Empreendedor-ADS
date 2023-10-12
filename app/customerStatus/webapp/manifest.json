@@ -1,0 +1,156 @@
+{
+    "_version": "1.49.0",
+    "sap.app": {
+        "id": "finalproject.app.customerstatus",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.10.4",
+            "toolsId": "7719c92f-c425-4dcc-b42e-f64f48406df4"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/odata/v4/customerStatus-service-draft/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "finalproject-app-customerstatus-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "finalproject",
+                    "action": "customerstatus",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": "sap-icon://customer"
+                }
+            }
+        }
+    },
+    "sap.cloud": {
+        "service": "finalproject",
+        "public": true
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.116.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "finalproject.app.customerstatus.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "customerStatusFioriList",
+                    "target": "customerStatusFioriList"
+                },
+                {
+                    "pattern": "customerStatusFiori({key}):?query:",
+                    "name": "customerStatusFioriObjectPage",
+                    "target": "customerStatusFioriObjectPage"
+                }
+            ],
+            "targets": {
+                "customerStatusFioriList": {
+                    "type": "Component",
+                    "id": "customerStatusFioriList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "StatusCustomer",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "customerStatusFiori": {
+                                    "detail": {
+                                        "route": "customerStatusFioriObjectPage"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "customerStatusFioriObjectPage": {
+                    "type": "Component",
+                    "id": "customerStatusFioriObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "StatusCustomer"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

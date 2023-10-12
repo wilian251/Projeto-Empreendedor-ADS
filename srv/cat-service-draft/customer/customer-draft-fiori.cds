@@ -51,7 +51,7 @@ annotate CustomerServiceDraft.CustomerFiori with @(UI: {
             },
             TypeName: '{i18n>CNPJ}',
             TypeNamePlural: '{i18n>CNPJ}',
-             Description: {
+            Description: {
                 Value: customerName
             },
         },
