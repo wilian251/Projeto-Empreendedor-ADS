@@ -13,7 +13,7 @@
                     <VBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar 
                             id="idSmartFilterBar" 
-                            entitySet="Orders" 
+                            entitySet="Proposal" 
                             persistencyKey="SmartFilter_Explored"
                             enableBasicSearch="true"
                         >
@@ -23,7 +23,7 @@
                         </smartFilterBar:SmartFilterBar>
                         <smartTable:SmartTable 
                             id="idSmartTable" 
-                            entitySet="Orders" 
+                            entitySet="Proposal" 
                             smartFilterId="idSmartFilterBar" 
                             tableType="Table"
                             header="{i18n>orders}"

@@ -1,6 +1,6 @@
 using { CustomerStatusDraft } from './customerStatus-draft-service';
 
-annotate CustomerStatusDraft.StatusCustomer with @(
+annotate CustomerStatusDraft.StatusCustomerFiori with @(
     UI: {
         LineItem: [
             {
@@ -86,6 +86,7 @@ annotate CustomerStatusDraft.StatusCustomer with @(
         Facets : [
             {
                 $Type : 'UI.ReferenceFacet',
+                Label : '{i18n>generalData}',
                 Target : '@UI.FieldGroup#GeneralData',
             }
         ]

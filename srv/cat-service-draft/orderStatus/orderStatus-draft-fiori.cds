@@ -1,6 +1,6 @@
 using { OrderStatusDraft } from './orderStatus-draft-service';
 
-annotate OrderStatusDraft.StatusOrder with @(
+annotate OrderStatusDraft.StatusOrderFiori with @(
     UI: {
         LineItem: [
             {
@@ -10,7 +10,7 @@ annotate OrderStatusDraft.StatusOrder with @(
             },
             {
                 $Type: 'UI.DataField',
-                Value: orderstatusDescription,
+                Value: orderStatusDescription,
                 ![@UI.Importance] : #High
             }
         ],

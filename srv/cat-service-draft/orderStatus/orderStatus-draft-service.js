@@ -7,7 +7,7 @@ class OrderStatusServiceDraft extends cds.ApplicationService {
         //----------------------------------------------------------------------------------//
         // CREATE - StatusOrder                                                          //
         //----------------------------------------------------------------------------------//
-        this.before('CREATE', 'StatusOrder', async (req) => {
+        this.before('CREATE', 'StatusOrderFiori', async (req) => {
             const tx = cds.transaction(req);
 
             let bundle        = getBundle(req.user.locale),
@@ -29,7 +29,7 @@ class OrderStatusServiceDraft extends cds.ApplicationService {
         //----------------------------------------------------------------------------------//
         // UPDATE - StatusOrder                                                          //
         //----------------------------------------------------------------------------------//
-        this.before('UPDATE', 'StatusOrder', async (req) => {
+        this.before('UPDATE', 'StatusOrderFiori', async (req) => {
             const tx = cds.transaction(req);
 
             let bundle = getBundle(req.user.locale),

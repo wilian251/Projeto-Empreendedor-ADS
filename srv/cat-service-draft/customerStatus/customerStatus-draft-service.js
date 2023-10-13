@@ -7,7 +7,7 @@ class CustomerStatusServiceDraft extends cds.ApplicationService {
         //----------------------------------------------------------------------------------//
         // CREATE - StatusCustomer                                                          //
         //----------------------------------------------------------------------------------//
-        this.before('CREATE', 'StatusCustomer', async (req) => {
+        this.before('CREATE', 'StatusCustomerFiori', async (req) => {
             const tx = cds.transaction(req);
 
             let bundle        = getBundle(req.user.locale),
@@ -29,7 +29,7 @@ class CustomerStatusServiceDraft extends cds.ApplicationService {
         //----------------------------------------------------------------------------------//
         // UPDATE - StatusCustomer                                                          //
         //----------------------------------------------------------------------------------//
-        this.before('UPDATE', 'StatusCustomer', async (req) => {
+        this.before('UPDATE', 'StatusCustomerFiori', async (req) => {
             const tx = cds.transaction(req);
 
             let bundle = getBundle(req.user.locale),

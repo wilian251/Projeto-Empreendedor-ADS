@@ -17,7 +17,7 @@
         },
         "dataSources": {
             "mainService": {
-                "uri": "/odata/v4/orderStatus-service-draft/",
+                "uri": "/odata/v4/order-status-draft/",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
