@@ -3,6 +3,20 @@ sap.ui.define([], function () {
 
     return {
 
+        initDateHours: function() {
+            return sap.ui.core.format.DateFormat.getDateTimeInstance({
+                pattern: "yyyy-MM-ddTHH:mm:ss",
+                UTC: false
+            }).format(new Date());
+        },
+
+        converterDate: function(sDate) {
+            return sap.ui.core.format.DateFormat.getDateTimeInstance({
+                pattern: "yyyy-MM-dd",
+                UTC: false
+            }).format(sDate);
+        },
+
         /**
          * Rounds the number unit value to 2 digits
          * @public
@@ -14,12 +28,6 @@ sap.ui.define([], function () {
                 return "";
             }
             return parseFloat(sValue).toFixed(2);
-        },
-        ncm : function (sValue) {
-            if (!sValue) {
-                return "";
-            }
-            return `${sValue.substring(0,4)}.${sValue.substring(4,6)}.${sValue.substring(6,8)}`;  
         },
 
         cnpj : function (sValue) {
@@ -37,16 +45,6 @@ sap.ui.define([], function () {
             sValue =  sValue.padStart(11, "0")
             return `${sValue.substring(0,3)}.${sValue.substring(3,6)}.${sValue.substring(6,9)}-${sValue.substring(9,11)}-${sValue.substring(12,14)}`;
         },
-
-        awb : function (sValue) {
-            if (!sValue) {
-                return "";
-            }
-            
-            sValue =  sValue.padStart(11, "0")
-            return `${sValue.substring(0,3)}-${sValue.substring(3,11)}`;
-        
-        }
 
     };
 

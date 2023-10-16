@@ -1,53 +1,53 @@
 const cds           = require('@sap/cds');
 const { getBundle } = require('../../common/i18n');
 
-class OrderStatusServiceDraft extends cds.ApplicationService {
+class CustomerStatusServiceDraft extends cds.ApplicationService {
     init() {
 
         //----------------------------------------------------------------------------------//
-        // CREATE - StatusOrder                                                          //
+        // CREATE - StatusCustomer                                                          //
         //----------------------------------------------------------------------------------//
-        this.before('CREATE', 'StatusOrderFiori', async (req) => {
+        this.before('CREATE', 'CustomerStatusFiori', async (req) => {
             const tx = cds.transaction(req);
 
             let bundle        = getBundle(req.user.locale),
-                oStatusNumber = req.data.orderStatusNumber.replace(" ","");
+                oStatusNumber = req.data.customerStatusNumber.replace(" ","");
                     
-            let oStatus = await tx.read(cds.services.CatalogService.entities.StatusOrder, ['ID'])
+            let oStatus = await tx.read(cds.services.CatalogService.entities.StatusCustomer, ['ID'])
                                 .where(
                                     { 
-                                        orderStatusNumber: oStatusNumber
+                                        customerStatusNumber: oStatusNumber
                                     }
                                 );
 
             if (oStatus.length > 0) {
-                const txt = bundle.getText("mERROR_UNIQUE",[req.data.orderStatusNumber, bundle.getText("orderStatusNumber")]);
+                const txt = bundle.getText("mERROR_UNIQUE",[req.data.customerStatusNumber, bundle.getText("customerStatusNumber")]);
                 return req.error(410, txt);
             }
         });
 
         //----------------------------------------------------------------------------------//
-        // UPDATE - StatusOrder                                                          //
+        // UPDATE - StatusCustomer                                                          //
         //----------------------------------------------------------------------------------//
-        this.before('UPDATE', 'StatusOrderFiori', async (req) => {
+        this.before('UPDATE', 'CustomerStatusFiori', async (req) => {
             const tx = cds.transaction(req);
 
             let bundle = getBundle(req.user.locale),
-                oStatusNumber = req.data.orderStatusNumber?.replace(" ","");
+                oStatusNumber = req.data.customerStatusNumber?.replace(" ","");
 
             //Validar Status
             if (oStatusNumber) {
-                let oStatus = await tx.read(cds.services.CatalogService.entities.StatusOrder, ['ID']).where(
+                let oStatus = await tx.read(cds.services.CatalogService.entities.StatusCustomer, ['ID']).where(
                     { 
                         ID: {
                             '<>': req.data.ID
                         },
-                        orderStatusNumber: oStatusNumber
+                        customerStatusNumber: oStatusNumber
                     }
                 );
                 
                 if (oStatus.length > 0) {
-                    const txt = bundle.getText("mERROR_UNIQUE",[req.data.orderStatusNumber, bundle.getText("orderStatusNumber")]);
+                    const txt = bundle.getText("mERROR_UNIQUE",[req.data.customerStatusNumber, bundle.getText("customerStatusNumber")]);
                     return req.error(410, txt);
                 }
             }
@@ -58,4 +58,4 @@ class OrderStatusServiceDraft extends cds.ApplicationService {
     }
 }
 
-module.exports = { OrderStatusServiceDraft };
+module.exports = { CustomerStatusServiceDraft };

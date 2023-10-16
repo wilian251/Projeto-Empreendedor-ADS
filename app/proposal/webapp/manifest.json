@@ -22,22 +22,22 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "capdemowm-app-cargoreceipt-inbound": {
+                "finalproject-app-proposal-inbound": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "cargoreceipt",
-                    "action": "create",
+                    "semanticObject": "proposal",
+                    "action": "PROPOSAL",
                     "title": "{{flpTitle}}",
                     "subTitle": "{{flpSubtitle}}",
-                    "icon": "sap-icon://SAP-icons-TNT/process-package"
+                    "icon": ""
                 }
             }
         }
     },
     "sap.cloud": {
-        "service": "capdemowm",
+        "service": "finalproject",
         "public": true
     }, 
     "sap.ui": {
@@ -59,7 +59,7 @@
     "sap.ui5": {
         "flexEnabled": true,
         "dependencies": {
-            "minUI5Version": "1.97.2",
+            "minUI5Version": "1.116.0",
             "libs": {
                 "sap.ui.core": {},
                 "sap.m": {},
@@ -80,7 +80,7 @@
             "appView": {
                 "type": "sap.ui.model.json.JSONModel"
             },
-            "newObject": {
+            "proposal": {
                 "type": "sap.ui.model.json.JSONModel"
             },
             "": {
@@ -123,17 +123,10 @@
                     ]
                 },
                 {
-                    "pattern": "CargoReceipt/{objectId}",
-                    "name": "object",
+                    "pattern": "proposal/{orderId},{proposalId}",
+                    "name": "proposal",
                     "target": [
-                        "object"
-                    ]
-                },
-                {
-                    "pattern": "NewObject",
-                    "name": "newObject",
-                    "target": [
-                        "newObject"
+                        "proposal"
                     ]
                 }
             ],
@@ -144,17 +137,11 @@
                     "viewLevel": 1,
                     "title": "{i18n>mainViewTitle}"
                 },
-                "object": {
-                    "viewName": "Object",
-                    "viewId": "object",
+                "proposal": {
+                    "viewName": "Proposal",
+                    "viewId": "proposal",
                     "viewLevel": 2,
-                    "title": "{i18n>objectViewTitle}"
-                },
-                "newObject": {
-                    "viewName": "NewObject",
-                    "viewId": "newObject",
-                    "viewLevel": 2,
-                    "title": "{i18n>objectViewTitle}"
+                    "title": "{i18n>proposalViewTitle}"
                 },
                 "objectNotFound": {
                     "viewName": "ObjectNotFound",

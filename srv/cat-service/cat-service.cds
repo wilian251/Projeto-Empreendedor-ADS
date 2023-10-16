@@ -9,6 +9,7 @@ service CatalogService {// @( requires:'authenticated-user') {
     entity Orders as projection on finalproject.Orders;
     entity OrderItems as projection on finalproject.OrderItems;
     entity Proposal as projection on finalproject.Proposal;
+    entity ProposalItems as projection on finalproject.ProposalItems;
     entity StatusCustomer as projection on finalproject.StatusCustomer;
     entity StatusOrder as projection on finalproject.StatusOrder;
 }

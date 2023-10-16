@@ -33,7 +33,7 @@
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "finalproject",
+                    "semanticObject": "products",
                     "action": "PRODUCTS",
                     "title": "{{flpTitle}}",
                     "subTitle": "{{flpSubtitle}}",

@@ -22,10 +22,11 @@ using from './cat-service-draft/orders/orders-draft-service';
 using from './cat-service-draft/orders/orders-draft-fiori';
 
 // CustomerStatus
-using from './cat-service-draft/customerStatus/customerStatus-draft-service';
-using from './cat-service-draft/customerStatus/customerStatus-draft-fiori';
+using from './cat-service-draft/customer-status/customer-status-draft-fiori';
+using from './cat-service-draft/customer-status/customer-status-draft-fiori';
 
 // OrderStatus
-using from './cat-service-draft/orderStatus/orderStatus-draft-service';
-using from './cat-service-draft/orderStatus/orderStatus-draft-fiori';
+using from './cat-service-draft/order-status/order-status-draft-service';
+using from './cat-service-draft/order-status/order-status-draft-fiori';
+
 

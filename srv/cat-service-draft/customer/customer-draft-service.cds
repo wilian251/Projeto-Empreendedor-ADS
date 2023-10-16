@@ -4,5 +4,5 @@ service CustomerServiceDraft {// @( requires:'authenticated-user') {
     @odata.draft.enabled
     entity CustomerFiori as projection on finalproject.Customer;
 
-    entity Status as projection on finalproject.StatusCustomer;
+    entity StatusCustomer as projection on finalproject.StatusCustomer;
 }

@@ -60,6 +60,18 @@ modules:
       - finalprojectapporders.zip
       name: finalprojectapporders
       target-path: resources/
+    - artifacts:
+      - finalprojectappcustomerstatus.zip
+      name: finalprojectappcustomerstatus
+      target-path: resources/
+    - artifacts:
+      - finalprojectapporderstatus.zip
+      name: finalprojectapporderstatus
+      target-path: resources/
+    - artifacts:
+      - finalprojectappproposal.zip
+      name: finalprojectappproposal
+      target-path: resources/
 - name: finalprojectappusers
   type: html5
   path: app/users
@@ -113,6 +125,16 @@ modules:
 - name: finalprojectappcustomerstatus
   type: html5
   path: app/customerstatus
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: finalprojectappproposal
+  type: html5
+  path: app/proposal
   build-parameters:
     build-result: dist
     builder: custom

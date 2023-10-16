@@ -378,7 +378,7 @@ annotate Orders with @(
     Common      : {
       ValueList        : {
         $Type : 'Common.ValueListType',
-        CollectionPath : 'Status',
+        CollectionPath : 'StatusOrder',
         SearchSupported: true,
         Parameters     : [
           {
@@ -466,6 +466,10 @@ annotate OrderItems with @(
     title       : '{i18n>product}',
     description : '{i18n>product}',
     Common      : {
+      Text      : {
+        $value                 : product.productDescription,
+        ![@UI.TextArrangement] : #TextOnly
+      },
       ValueList        : {
         $Type : 'Common.ValueListType',
         CollectionPath : 'Products',

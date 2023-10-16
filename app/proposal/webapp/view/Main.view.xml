@@ -1,4 +1,4 @@
-<mvc:View
+<mvc:View xmlns:table="sap.ui.table"
     controllerName="finalproject.app.proposal.controller.Main"
     displayBlock="true"
     xmlns="sap.m"
@@ -13,24 +13,60 @@
                     <VBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar 
                             id="idSmartFilterBar" 
-                            entitySet="Proposal" 
+                            entitySet="Orders" 
                             persistencyKey="SmartFilter_Explored"
-                            enableBasicSearch="true"
-                        >
+                        >   
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration
+                                    index="0"
+                                    key="orderNumber"
+                                    visibleInAdvancedArea="true"
+                                    preventInitialDataFetchInValueHelpDialog="false"
+                                />
+                                <smartFilterBar:ControlConfiguration
+                                    index="1"
+                                    key="orderStatusNumber"
+                                    visibleInAdvancedArea="true"
+                                    preventInitialDataFetchInValueHelpDialog="false"
+                                />
+                                <smartFilterBar:ControlConfiguration
+                                    index="2"
+                                    key="orderExpirationDate"
+                                    visibleInAdvancedArea="true"
+                                    preventInitialDataFetchInValueHelpDialog="false"
+                                />
+                            </smartFilterBar:controlConfiguration>
                             <smartFilterBar:layoutData>
                                 <FlexItemData shrinkFactor="0"/>
                             </smartFilterBar:layoutData>
                         </smartFilterBar:SmartFilterBar>
                         <smartTable:SmartTable 
                             id="idSmartTable" 
-                            entitySet="Proposal" 
+                            entitySet="Orders" 
                             smartFilterId="idSmartFilterBar" 
-                            tableType="Table"
+                            tableType="ResponsiveTable"
                             header="{i18n>orders}"
                             persistencyKey="SmartTableAnalytical_Explored" 
-                            enableAutoBinding="true" 
+                            enableAutoBinding="true"
                             class="sapUiResponsiveContentPadding"
+                            enableAutoColumnWidth="true"
+                            beforeRebindTable="onBeforeRebindTable"
+                            initiallyVisibleFields="orderStatusNumber,orderNumber,orderDescription,orderExpirationDate,orderStatusNumber"
                         >
+                            <Table>
+                                <columns>
+                                </columns>
+                                <items>
+                                    <ColumnListItem
+                                        press="onPressOrder"
+                                        type="Navigation"
+                                    >
+                                        <cells>
+                                            
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
                             <smartTable:layoutData>
                                 <FlexItemData growFactor="1" baseSize="0%"/>
                             </smartTable:layoutData>

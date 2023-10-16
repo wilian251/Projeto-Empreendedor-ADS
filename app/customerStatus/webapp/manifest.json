@@ -107,42 +107,42 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "customerStatusFioriList",
-                    "target": "customerStatusFioriList"
+                    "name": "CustomerStatusFioriList",
+                    "target": "CustomerStatusFioriList"
                 },
                 {
-                    "pattern": "customerStatusFiori({key}):?query:",
-                    "name": "customerStatusFioriObjectPage",
-                    "target": "customerStatusFioriObjectPage"
+                    "pattern": "CustomerStatusFiori({key}):?query:",
+                    "name": "CustomerStatusFioriObjectPage",
+                    "target": "CustomerStatusFioriObjectPage"
                 }
             ],
             "targets": {
-                "customerStatusFioriList": {
+                "CustomerStatusFioriList": {
                     "type": "Component",
-                    "id": "customerStatusFioriList",
+                    "id": "CustomerStatusFioriList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "StatusCustomer",
+                            "entitySet": "CustomerStatusFiori",
                             "variantManagement": "Page",
                             "navigation": {
-                                "customerStatusFiori": {
+                                "CustomerStatusFiori": {
                                     "detail": {
-                                        "route": "customerStatusFioriObjectPage"
+                                        "route": "CustomerStatusFioriObjectPage"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "customerStatusFioriObjectPage": {
+                "CustomerStatusFioriObjectPage": {
                     "type": "Component",
-                    "id": "customerStatusFioriObjectPage",
+                    "id": "CustomerStatusFioriObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "StatusCustomer"
+                            "entitySet": "CustomerStatusFiori"
                         }
                     }
                 }
