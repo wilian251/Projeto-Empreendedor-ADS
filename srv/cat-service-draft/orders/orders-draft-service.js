@@ -1,5 +1,6 @@
 const cds = require('@sap/cds');
 const { getBundle } = require('../../common/i18n');
+const { OrdersNumerator } = require("../../common/create-sequence-numerators");
 
 class OrdersServiceDraft extends cds.ApplicationService {
     init() {
@@ -8,7 +9,9 @@ class OrdersServiceDraft extends cds.ApplicationService {
         // CREATE - Orders                                                                  //
         //----------------------------------------------------------------------------------//
         this.before('CREATE', 'OrdersFiori', async (req) => {
-            const tx   = cds.transaction(req);
+            const tx = cds.transaction(req);
+
+            await OrdersNumerator(req);
 
             let bundle       = getBundle(req.user.locale),
                 oOrderNumber = req.data.orderNumber.replace(" ","");
@@ -30,7 +33,7 @@ class OrdersServiceDraft extends cds.ApplicationService {
         // UPDATE - Orders                                                                  //
         //----------------------------------------------------------------------------------//
         this.before('UPDATE', 'OrdersFiori', async (req) => {
-            const tx   = cds.transaction(req);
+            const tx = cds.transaction(req);
 
             let bundle       = getBundle(req.user.locale),
                 oOrderNumber = req.data.orderNumber?.replace(" ","");

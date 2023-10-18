@@ -40,12 +40,12 @@
                     <m:Button
                         text="{i18n>proposalViewButtonTitlePublish}" 
                         type="Emphasized" 
-                        visible="{proposal>/common/visiblePublish}" 
+                        visible="false" 
                         icon="sap-icon://back-to-top"
                     />
                     <m:Button 
                         text="{i18n>proposalViewButtonTitleEdit}" 
-                        visible="{proposal>/common/visibleEdit}" 
+                        visible="false" 
                         type="Emphasized" 
                         icon="sap-icon://edit"
                     />
@@ -58,7 +58,7 @@
                     />
                     <m:Button 
                         text="{i18n>proposalViewButtonTitleDelete}" 
-                        visible="{proposal>/common/visibleDelete}" 
+                        visible="false" 
                         type="Negative" 
                         icon="sap-icon://decline"
                     />

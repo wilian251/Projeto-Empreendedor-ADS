@@ -238,7 +238,7 @@ annotate Customer with @(
     Common      : {
       ValueList        : {
         $Type : 'Common.ValueListType',
-        CollectionPath : 'Status',
+        CollectionPath : 'StatusCustomer',
         SearchSupported: true,
         Parameters     : [
           {

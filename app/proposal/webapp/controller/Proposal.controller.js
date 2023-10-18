@@ -169,10 +169,14 @@ sap.ui.define([
 
                             await Promise.all(oPromiseItems).then(
                                 function(oData) {
-                                    MessageBox.success(this.getResourceBundle().getText("messageSuccessProposal"));
-                                
-                                    this.getRouter().navTo("main");
-                                    this.setAppBusy(false);
+                                    MessageBox.success(this.getResourceBundle().getText("messageSuccessProposal"), {
+                                        actions: [MessageBox.Action.CLOSE],
+                                        emphasizedAction: MessageBox.Action.CLOSE,
+                                        onClose: function (sAction) {
+                                            this.getRouter().navTo("main");
+                                            this.setAppBusy(false);
+                                        }.bind(this)
+                                    });
                                 }.bind(this)
                             ).catch(
                                 function(oError) {
