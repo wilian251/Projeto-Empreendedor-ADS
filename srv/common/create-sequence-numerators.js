@@ -5,7 +5,7 @@ async function OrdersNumerator(req) {
     
     const tx = cds.transaction(req);
             
-    let oOrder =  await tx.read(cds.services.CatalogService.entities.Orders, ['max(orderNumber)']);
+    let oOrder = await tx.read(cds.services.CatalogService.entities.Orders, ['max(orderNumber)']);
     
     let oNewValue = "";
 
@@ -20,13 +20,15 @@ async function OrdersNumerator(req) {
 
     req.data.orderNumber = String(oNewValue);
 
+    ItemsNumerators(req.data.orderItems, "item");
+
 };
 
 async function ProposalNumerator(req) {
 
     const tx = cds.transaction(req);
             
-    let oProposal    =  await tx.read(cds.services.CatalogService.entities.Proposal, ['max(proposalNumber)']);
+    let oProposal = await tx.read(cds.services.CatalogService.entities.Proposal, ['max(proposalNumber)']);
 
     let oNewValue = "";
 
@@ -41,11 +43,16 @@ async function ProposalNumerator(req) {
 
     req.data.proposalNumber = String(oNewValue);
 
+    ItemsNumerators(req.data.proposalItems, "proposalItemNumber");
+
 };
 
-function ItemsNumerators(sItems) {
-    sItems.map(sItem => {
+function ItemsNumerators(sItems, sPath) {
+    let oCount = 1
 
+    sItems.map(sItem => {
+        sItem[sPath] = ("000" + oCount).slice(-3);
+        oCount++;
     });
 };
 
