@@ -324,7 +324,7 @@ annotate Products with @(
 //------------------------------------------------------//
 
 entity Orders : cuid, managed {
-  orderNumber: String not null @mandatory;
+  orderNumber: String not null @mandatory @readonly;
   orderDescription : String not null;
   orderExpirationDate: Date not null;
   orderStatusNumber: Integer not null;
@@ -405,7 +405,7 @@ annotate Orders with @(
 //------------------------------------------------------//
 
 entity OrderItems : cuid, managed {
-  item: String not null @mandatory;
+  item: String not null @mandatory @readonly;
   itemQtd: String not null;
   itemProductCode: String not null;
   order: Association to Orders @readonly;
@@ -510,7 +510,7 @@ annotate OrderItems with @(
 //------------------------------------------------------//
 
 entity Proposal : cuid, managed {
-  proposalNumber: String not null @mandatory;
+  proposalNumber: String not null @mandatory @readonly;
   proposalTitle: String not null;
   proposalExpirationDate: Date not null;
   proposalStatusNumber: Integer not null;
@@ -652,7 +652,7 @@ annotate Proposal with @(
 //------------------------------------------------------//
 
 entity ProposalItems : cuid, managed {
-  proposalItemNumber: String not null @mandatory;
+  proposalItemNumber: String not null @mandatory @readonly;
   proposalItemQtd: String not null;
   proposalItemValue: Decimal not null;
   proposal: Association to Proposal @readonly;
