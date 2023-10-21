@@ -12,4 +12,15 @@ service CatalogService {// @( requires:'authenticated-user') {
     entity ProposalItems as projection on finalproject.ProposalItems;
     entity StatusCustomer as projection on finalproject.StatusCustomer;
     entity StatusOrder as projection on finalproject.StatusOrder;
+    
+    type ProposalDeep: {
+        proposalNumber: String;
+        proposalTitle: String;
+        proposalExpirationDate: Date;
+        proposalStatusNumber: Integer;
+        customers: Composition of many Customer;
+        proposalItems: Composition of many ProposalItems;
+    };
+
+    function ProposalDeepEntity(ProposalDeep: ProposalDeep) returns ProposalDeep;
 }

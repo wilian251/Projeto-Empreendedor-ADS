@@ -15,7 +15,7 @@ namespace finalproject;
 //------------------------------------------------------//
 //------------------------------------------------------//
 entity StatusCustomer: cuid, managed {
-  customerStatusNumber: Integer not null @mandatory;
+  customerStatusNumber: String not null default 'Novo' @mandatory @readonly;
   customerStatusDescription: String not null;
 }
 
@@ -59,7 +59,7 @@ annotate StatusCustomer with @(
 //------------------------------------------------------//
 //------------------------------------------------------//
 entity StatusOrder: cuid, managed {
-  orderStatusNumber: Integer not null @mandatory;
+  orderStatusNumber: String not null default 'Novo' @mandatory @readonly;
   orderStatusDescription: String not null;
 }
 
@@ -170,7 +170,7 @@ entity Customer : cuid , managed, Address {
   customerEmail: String  not null;
   telephone: String  not null;
   customerSource: String not null;
-  customerType: Integer not null;
+  customerType: String not null;
   customerInactive: Boolean default false;
   customerStatus: Association to one StatusCustomer on customerStatus.customerStatusNumber = customerType;
 }
@@ -265,7 +265,7 @@ annotate Customer with @(
 //------------------------------------------------------//
 //Entity
 entity Products : cuid , managed {
-  productCode: String not null @mandatory;
+  productCode: String not null default 'Novo' @mandatory @readonly;
   productName: String not null;
   productDescription: String not null;
   productValue: Decimal not null;
@@ -324,10 +324,10 @@ annotate Products with @(
 //------------------------------------------------------//
 
 entity Orders : cuid, managed {
-  orderNumber: String not null @mandatory @readonly;
+  orderNumber: String not null default 'Novo' @mandatory @readonly;
   orderDescription : String not null;
   orderExpirationDate: Date not null;
-  orderStatusNumber: Integer not null;
+  orderStatusNumber: String not null;
   orderStatus: Association to one StatusOrder on orderStatus.orderStatusNumber = orderStatusNumber;
   orderItems: Composition of many OrderItems on orderItems.order = $self;
 }
@@ -405,7 +405,7 @@ annotate Orders with @(
 //------------------------------------------------------//
 
 entity OrderItems : cuid, managed {
-  item: String not null @mandatory @readonly;
+  item: String not null default 'Novo' @mandatory @readonly;
   itemQtd: String not null;
   itemProductCode: String not null;
   order: Association to Orders @readonly;
@@ -510,10 +510,10 @@ annotate OrderItems with @(
 //------------------------------------------------------//
 
 entity Proposal : cuid, managed {
-  proposalNumber: String not null @mandatory @readonly;
+  proposalNumber: String not null default 'Novo' @mandatory @readonly;
   proposalTitle: String not null;
   proposalExpirationDate: Date not null;
-  proposalStatusNumber: Integer not null;
+  proposalStatusNumber: String not null;
   customer: Composition of many Customer;
   order: Association to one Orders;
   proposalStatus: Association to one StatusOrder on proposalStatus.orderStatusNumber = proposalStatusNumber;
@@ -652,7 +652,7 @@ annotate Proposal with @(
 //------------------------------------------------------//
 
 entity ProposalItems : cuid, managed {
-  proposalItemNumber: String not null @mandatory @readonly;
+  proposalItemNumber: String not null default 'Novo' @mandatory @readonly;
   proposalItemQtd: String not null;
   proposalItemValue: Decimal not null;
   proposal: Association to Proposal @readonly;

@@ -11,7 +11,8 @@ class OrdersServiceDraft extends cds.ApplicationService {
         this.before('CREATE', 'OrdersFiori', async (req) => {
             const tx = cds.transaction(req);
 
-            await OrdersNumerator(req);
+            //Cria Número sequencial
+            await OrdersNumerator(req, tx);
 
             let bundle       = getBundle(req.user.locale),
                 oOrderNumber = req.data.orderNumber.replace(" ","");
