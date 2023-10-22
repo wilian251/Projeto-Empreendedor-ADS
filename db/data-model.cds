@@ -269,6 +269,7 @@ entity Products : cuid , managed {
   productName: String not null;
   productDescription: String not null;
   productValue: Decimal not null;
+  currency: Currency;
   productInactive: Boolean not null default false;
 }
 
@@ -312,6 +313,10 @@ annotate Products with @(
   productValue @(
     title       : '{i18n>productValue}',
     description : '{i18n>productValue}',
+  );
+  currency @(
+    title       : '{i18n>currency}',
+    description : '{i18n>currency}',
   );
   productInactive @(
     title       : '{i18n>inactive}',
@@ -655,6 +660,7 @@ entity ProposalItems : cuid, managed {
   proposalItemNumber: String not null default 'Novo' @mandatory @readonly;
   proposalItemQtd: String not null;
   proposalItemValue: Decimal not null;
+  currency: Currency;
   proposal: Association to Proposal @readonly;
 }
 
@@ -691,6 +697,10 @@ annotate ProposalItems with @(
   proposalItemValue @(
     title       : '{i18n>itemValue}',
     description : '{i18n>itemValue}',
+  );
+  currency @(
+    title       : '{i18n>currency}',
+    description : '{i18n>currency}',
   );
   proposal @(
     title: '{i18n>proposal}',
