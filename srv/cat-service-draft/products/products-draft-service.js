@@ -9,7 +9,7 @@ class ProductsServiceDraft extends cds.ApplicationService {
         // CREATE - Products                                                                //
         //----------------------------------------------------------------------------------//
         this.before('CREATE', 'ProductsFiori', async (req) => {
-            const tx   = cds.transaction(req);
+            const tx = cds.transaction(req);
 
             //Cria o Número sequencial
             await ProductNumerator(req, tx);

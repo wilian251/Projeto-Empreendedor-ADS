@@ -1,49 +1,47 @@
-using { OrderStatusDraft } from './order-status-draft-service';
+using { CustomerStatusDraft } from './customerstatus-draft-service';
 
-annotate OrderStatusDraft.OrderStatusFiori with @(UI: {
+annotate CustomerStatusDraft.CustomerStatusFiori with @(
+    UI: {
         LineItem: [
             {
                 $Type: 'UI.DataField',
-                Value: orderStatusNumber,
+                Value: customerStatusNumber,
                 ![@UI.Importance] : #High
             },
             {
                 $Type: 'UI.DataField',
-                Value: orderStatusDescription,
+                Value: customerStatusDescription,
                 ![@UI.Importance] : #High
             }
         ],
         PresentationVariant : {
-            $Type : 'UI.PresentationVariantType',
-            SortOrder : [{
-                Property : orderStatusNumber,
-            }]
+            $Type     : 'UI.PresentationVariantType',
+            SortOrder : [{ Property : customerStatusNumber }]
         },
         SelectionFields : [
-            orderStatusNumber,
-            orderStatusDescription
-        ]
+            customerStatusNumber,
+            customerStatusDescription
+        ],
     },
     //Object Page
     UI: {
         HeaderInfo  : {
             $Type : 'UI.HeaderInfoType',
-            TypeName : '{i18n>orderStatus}',
-            TypeNamePlural : '{i18n>orderStatusPlural}',
+            TypeName : '{i18n>customerStatus}',
+            TypeNamePlural : '{i18n>customerStatusPlural}',
             Title : {
                 $Type : 'UI.DataField',
-                Value : orderStatusNumber,
+                Value : customerStatusNumber,
             },
             Description : {
                 $Type : 'UI.DataField',
-                Value : orderStatusDescription,
+                Value : customerStatusDescription,
             },
         },
         HeaderFacets : [
             {
                 $Type : 'UI.ReferenceFacet',
                 Target : '@UI.FieldGroup#Admin',
-                ![@UI.Importance] : #Medium
             },
         ],
         FieldGroup #Admin : {
@@ -72,12 +70,12 @@ annotate OrderStatusDraft.OrderStatusFiori with @(UI: {
             Data : [
                 {
                     $Type : 'UI.DataField',
-                    Value: orderStatusNumber,
+                    Value: customerStatusNumber,
                     ![@Common.FieldControl] : #Mandatory
                 },
                 {
                     $Type : 'UI.DataField',
-                    Value: orderStatusDescription,
+                    Value: customerStatusDescription,
                     ![@Common.FieldControl] : #Mandatory
                 }
             ]
@@ -87,6 +85,7 @@ annotate OrderStatusDraft.OrderStatusFiori with @(UI: {
         Facets : [
             {
                 $Type : 'UI.ReferenceFacet',
+                Label : '{i18n>generalData}',
                 Target : '@UI.FieldGroup#GeneralData',
             }
         ]
