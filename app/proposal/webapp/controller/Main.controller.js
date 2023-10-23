@@ -29,7 +29,7 @@ sap.ui.define([
             let oFilters = oEvent.getParameter("bindingParams").filters;
 
             oFilters.push(new Filter("orderExpirationDate", FilterOperator.GE, Formatter.initDateHours()));
-            oFilters.push(new Filter("orderStatusNumber", FilterOperator.EQ, "2"));
+            oFilters.push(new Filter("orderStatusNumber", FilterOperator.EQ, "1"));
         },
 
         onPressOrder: function(oEvent) {

@@ -131,7 +131,7 @@ sap.ui.define([
                         "proposalNumber": oModel.proposal.proposalNumber,
                         "proposalTitle": oModel.proposal.proposalTitle,
                         "proposalExpirationDate": Formatter.converterDate(oModel.proposal.proposalExpirationDate),
-                        "proposalStatusNumber": 2,
+                        "proposalStatusNumber": "1",
                         "customer_ID": oModel.proposal.proposalCustomers[0].ID,
                         "order_ID": oModel.orderId
                       }
@@ -220,15 +220,13 @@ sap.ui.define([
                         "$expand": "orderItems"
                     },
                     success: function(oData) {
-                        let oObjectProposal = Proposal.initSelectionModel(),
-                            oCount          = 0;
+                        let oObjectProposal = Proposal.initSelectionModel();
 
                         oObjectProposal.orderId = oOrderId;
                         oObjectProposal.proposal.proposalTitle = this.getResourceBundle().getText("proposalViewLabelNew");
 
                         oData.orderItems.results.map(sItem => {
-                            oCount++;
-                            oObjectProposal.proposal.proposalItems.push(this._createObjectItem(oCount, sItem));
+                            oObjectProposal.proposal.proposalItems.push(this._createObjectItem(sItem));
                         });
 
                         this.getModel("proposal").setData(oObjectProposal);
@@ -246,9 +244,9 @@ sap.ui.define([
             }
         },
 
-        _createObjectItem: function(sCount, sObject) {
+        _createObjectItem: function(sObject) {
             return {
-                proposalItemNumber: String(sCount),
+                proposalItemNumber: sObject.item,
                 proposalItemQtd: sObject.itemQtd,
                 proposalItemValue: "",
             };

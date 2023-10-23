@@ -111,7 +111,7 @@
                     "target": "CustomerStatusFioriList"
                 },
                 {
-                    "pattern": "CustomerStatusFiori({key}):?query:",
+                    "pattern": "StatusCustomerFiori({key}):?query:",
                     "name": "CustomerStatusFioriObjectPage",
                     "target": "CustomerStatusFioriObjectPage"
                 }
@@ -123,10 +123,10 @@
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "CustomerStatusFiori",
+                            "entitySet": "StatusCustomerFiori",
                             "variantManagement": "Page",
                             "navigation": {
-                                "CustomerStatusFiori": {
+                                "StatusCustomerFiori": {
                                     "detail": {
                                         "route": "CustomerStatusFioriObjectPage"
                                     }
@@ -142,7 +142,7 @@
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "CustomerStatusFiori"
+                            "entitySet": "StatusCustomerFiori"
                         }
                     }
                 }

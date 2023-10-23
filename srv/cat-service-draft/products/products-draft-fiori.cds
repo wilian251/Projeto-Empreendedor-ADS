@@ -23,7 +23,7 @@ annotate ProductsServiceDraft.ProductsFiori with @(UI: {
             },
             {   
                 $Type : 'UI.DataField', 
-                Value : productValue,
+                Value : productValue ,
                 ![@UI.Importance] : #High
             },
             {   

@@ -2,13 +2,13 @@ const cds           = require('@sap/cds');
 const { getBundle } = require('../../common/i18n');
 const { StatusCustomerNumerator } = require("../../common/create-sequence-numerators");
 
-class CustomerStatusServiceDraft extends cds.ApplicationService {
+class StatusCustomerServiceDraft extends cds.ApplicationService {
     init() {
 
         //----------------------------------------------------------------------------------//
         // CREATE - StatusCustomer                                                          //
         //----------------------------------------------------------------------------------//
-        this.before('CREATE', 'CustomerStatusFiori', async (req) => {
+        this.before('CREATE', 'StatusCustomerFiori', async (req) => {
             const tx = cds.transaction(req);
 
             //Cria o Número sequencial
@@ -33,7 +33,7 @@ class CustomerStatusServiceDraft extends cds.ApplicationService {
         //----------------------------------------------------------------------------------//
         // UPDATE - StatusCustomer                                                          //
         //----------------------------------------------------------------------------------//
-        this.before('UPDATE', 'CustomerStatusFiori', async (req) => {
+        this.before('UPDATE', 'StatusCustomerFiori', async (req) => {
             const tx = cds.transaction(req);
 
             let bundle = getBundle(req.user.locale),
@@ -62,4 +62,4 @@ class CustomerStatusServiceDraft extends cds.ApplicationService {
     }
 }
 
-module.exports = { CustomerStatusServiceDraft };
+module.exports = { StatusCustomerServiceDraft };

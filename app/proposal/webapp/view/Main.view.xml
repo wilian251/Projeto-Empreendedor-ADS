@@ -1,4 +1,4 @@
-<mvc:View xmlns:table="sap.ui.table"
+<mvc:View 
     controllerName="finalproject.app.proposal.controller.Main"
     displayBlock="true"
     xmlns="sap.m"

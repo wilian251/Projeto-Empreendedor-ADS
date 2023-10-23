@@ -97,7 +97,7 @@ async function ProposalNumerator(req, tx) {
 
     req.data.proposalNumber = String(oNewValue);
 
-    ItemsNumerators(req.data.proposalItems, "proposalItemNumber");
+    //ItemsNumerators(req.data.proposalItems, "proposalItemNumber");
 
 };
 
@@ -115,5 +115,6 @@ module.exports = {
     StatusCustomerNumerator, 
     ProductNumerator, 
     OrdersNumerator, 
-    ProposalNumerator 
+    ProposalNumerator,
+    ItemsNumerators
 };

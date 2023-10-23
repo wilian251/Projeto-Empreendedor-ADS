@@ -15,7 +15,7 @@ namespace finalproject;
 //------------------------------------------------------//
 //------------------------------------------------------//
 entity StatusCustomer: cuid, managed {
-  customerStatusNumber: String not null default 'Novo' @mandatory @readonly;
+  customerStatusNumber: String not null default 'Novo' @mandatory;
   customerStatusDescription: String not null;
 }
 
@@ -59,7 +59,7 @@ annotate StatusCustomer with @(
 //------------------------------------------------------//
 //------------------------------------------------------//
 entity StatusOrder: cuid, managed {
-  orderStatusNumber: String not null default 'Novo' @mandatory @readonly;
+  orderStatusNumber: String not null default 'Novo' @mandatory;
   orderStatusDescription: String not null;
 }
 
@@ -268,7 +268,7 @@ entity Products : cuid , managed {
   productCode: String not null default 'Novo' @mandatory @readonly;
   productName: String not null;
   productDescription: String not null;
-  productValue: Decimal not null;
+  productValue: Decimal not null @Measures.ISOCurrency: currency_code;
   currency: Currency;
   productInactive: Boolean not null default false;
 }
@@ -659,7 +659,7 @@ annotate Proposal with @(
 entity ProposalItems : cuid, managed {
   proposalItemNumber: String not null default 'Novo' @mandatory @readonly;
   proposalItemQtd: String not null;
-  proposalItemValue: Decimal not null;
+  proposalItemValue: Decimal not null @Measures.ISOCurrency: currency_code;
   currency: Currency;
   proposal: Association to Proposal @readonly;
 }

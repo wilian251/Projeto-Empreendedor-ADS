@@ -22,9 +22,9 @@ using from './cat-service-draft/orders/orders-draft-service';
 using from './cat-service-draft/orders/orders-draft-fiori';
 
 // OrderStatus
-using from './cat-service-draft/orderstatus/orderstatus-draft-service';
-using from './cat-service-draft/orderstatus/orderstatus-draft-fiori';
+using from './cat-service-draft/statusorder/statusorder-draft-service';
+using from './cat-service-draft/statusorder/statusorder-draft-fiori';
 
 // CustomerStatus
-using from './cat-service-draft/customerstatus/customerstatus-draft-service';
-using from './cat-service-draft/customerstatus/customerstatus-draft-fiori';
+using from './cat-service-draft/statuscustomer/statuscustomer-draft-service';
+using from './cat-service-draft/statuscustomer/statuscustomer-draft-fiori';
