@@ -72,6 +72,14 @@ modules:
       - finalprojectappproposal.zip
       name: finalprojectappproposal
       target-path: resources/
+    - artifacts:
+      - finalprojectappproposalfiori.zip
+      name: finalprojectappproposalfiori
+      target-path: resources/
+    - artifacts:
+      - finalprojectappcustomerts.zip
+      name: finalprojectappcustomerts
+      target-path: resources/
 - name: finalprojectappusers
   type: html5
   path: app/users
@@ -135,6 +143,26 @@ modules:
 - name: finalprojectappproposal
   type: html5
   path: app/proposal
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: finalprojectappproposalfiori
+  type: html5
+  path: app/proposalfiori
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: finalprojectappcustomerts
+  type: html5
+  path: app/customerts
   build-parameters:
     build-result: dist
     builder: custom

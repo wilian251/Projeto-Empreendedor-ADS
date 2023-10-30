@@ -225,8 +225,8 @@ annotate Customer with @(
     description : '{i18n>email}',
   );
   telephone @(
-    title       : '{i18n>telephone}',
-    description : '{i18n>telephone}',
+    title       : '{i18n>customerTelephone}',
+    description : '{i18n>customerTelephone}',
   );
   customerSource @(
     title       : '{i18n>customerSource}',
@@ -269,7 +269,6 @@ entity Products : cuid , managed {
   productName: String not null;
   productDescription: String not null;
   productValue: Decimal not null @Measures.ISOCurrency: currency_code;
-  currency: Currency;
   productInactive: Boolean not null default false;
 }
 
@@ -313,10 +312,6 @@ annotate Products with @(
   productValue @(
     title       : '{i18n>productValue}',
     description : '{i18n>productValue}',
-  );
-  currency @(
-    title       : '{i18n>currency}',
-    description : '{i18n>currency}',
   );
   productInactive @(
     title       : '{i18n>inactive}',
@@ -657,10 +652,9 @@ annotate Proposal with @(
 //------------------------------------------------------//
 
 entity ProposalItems : cuid, managed {
-  proposalItemNumber: String not null default 'Novo' @mandatory @readonly;
+  proposalItemNumber: String not null @mandatory @readonly;
   proposalItemQtd: String not null;
   proposalItemValue: Decimal not null @Measures.ISOCurrency: currency_code;
-  currency: Currency;
   proposal: Association to Proposal @readonly;
 }
 
@@ -697,10 +691,6 @@ annotate ProposalItems with @(
   proposalItemValue @(
     title       : '{i18n>itemValue}',
     description : '{i18n>itemValue}',
-  );
-  currency @(
-    title       : '{i18n>currency}',
-    description : '{i18n>currency}',
   );
   proposal @(
     title: '{i18n>proposal}',

@@ -28,3 +28,8 @@ using from './cat-service-draft/statusorder/statusorder-draft-fiori';
 // CustomerStatus
 using from './cat-service-draft/statuscustomer/statuscustomer-draft-service';
 using from './cat-service-draft/statuscustomer/statuscustomer-draft-fiori';
+
+// Proposal
+using from './cat-service-draft/proposal/proposal-draft-service';
+using from './cat-service-draft/proposal/proposal-draft-fiori';
+

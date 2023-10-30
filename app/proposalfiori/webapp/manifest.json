@@ -1,7 +1,7 @@
 {
     "_version": "1.49.0",
     "sap.app": {
-        "id": "finalproject.app.products",
+        "id": "finalproject.app.proposalfiori",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -13,11 +13,11 @@
         "sourceTemplate": {
             "id": "@sap/generator-fiori:lrop",
             "version": "1.10.4",
-            "toolsId": "59720967-e4ef-4142-a7ac-7040ce0e7e5a"
+            "toolsId": "7719c92f-c425-4dcc-b42e-f64f48406df4"
         },
         "dataSources": {
             "mainService": {
-                "uri": "/odata/v4/products-service-draft/",
+                "uri": "/odata/v4/proposal-service-draft/",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
@@ -28,16 +28,16 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "finalproject-app-products-inbound": {
+                "finalproject-app-proposalfiori-inbound": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "products",
-                    "action": "PRODUCTS",
+                    "semanticObject": "finalproject",
+                    "action": "PROPOSALFIORI",
                     "title": "{{flpTitle}}",
                     "subTitle": "{{flpSubtitle}}",
-                    "icon": "sap-icon://add-product"
+                    "icon": ""
                 }
             }
         }
@@ -81,7 +81,7 @@
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
-                    "bundleName": "finalproject.app.products.i18n.i18n"
+                    "bundleName": "finalproject.app.proposalfiori.i18n.i18n"
                 }
             },
             "": {
@@ -103,68 +103,49 @@
             "css": []
         },
         "routing": {
+            "config": {},
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "ProductsFioriList",
-                    "target": "ProductsFioriList"
+                    "name": "ProposalFioriList",
+                    "target": "ProposalFioriList"
                 },
                 {
-                    "pattern": "ProductsFiori({key}):?query:",
-                    "name": "ProductsFioriObjectPage",
-                    "target": "ProductsFioriObjectPage"
+                    "pattern": "ProposalFiori({key}):?query:",
+                    "name": "ProposalFioriObjectPage",
+                    "target": "ProposalFioriObjectPage"
                 }
             ],
             "targets": {
-                "ProductsFioriList": {
+                "ProposalFioriList": {
                     "type": "Component",
-                    "id": "ProductsFioriList",
+                    "id": "ProposalFioriList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "ProductsFiori",
+                            "entitySet": "ProposalFiori",
                             "variantManagement": "Page",
                             "navigation": {
-                                "ProductsFiori": {
+                                "ProposalFiori": {
                                     "detail": {
-                                        "route": "ProductsFioriObjectPage"
+                                        "route": "ProposalFioriObjectPage"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "ProductsFioriObjectPage": {
+                "ProposalFioriObjectPage": {
                     "type": "Component",
-                    "id": "ProductsFioriObjectPage",
+                    "id": "ProposalFioriObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "ProductsFiori",
-                            "content": {
-                                "body": {
-                                    "sections": {
-                                        "myCustomSection": {
-                                            "template": "finalproject.app.products.custom.fragment.Novo",
-                                            "title": "teste",
-                                            "position": {
-                                                "placement": "Before",
-                                                "anchor": "com.sap.vocabularies.UI.v1.FieldGroup::GeneralData"
-                                            },
-                                            "type": "XMLFragment"
-                                        }
-                                    }
-                                }
-                            }
+                            "entitySet": "ProposalFiori"
                         }
                     }
                 }
-            }
-        },
-        "extends": {
-            "extensions": {
-                "sap.ui.controllerExtensions": {}
             }
         }
     },
