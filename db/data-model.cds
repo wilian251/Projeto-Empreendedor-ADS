@@ -164,13 +164,13 @@ annotate Users with @(
 //Entity
 entity Customer : cuid , managed, Address {
   CNPJ: String  not null @mandatory;
-  customerName : String not null @mandatory;
-  customerSurname: String not null;
-  company: String  not null;
-  customerEmail: String  not null;
-  telephone: String  not null;
-  customerSource: String not null;
-  customerType: String not null;
+  customerName : String;
+  customerSurname: String;
+  company: String;
+  customerEmail: String;
+  telephone: String;
+  customerSource: String;
+  customerType: String;
   customerInactive: Boolean default false;
   customerStatus: Association to one StatusCustomer on customerStatus.customerStatusNumber = customerType;
 }
@@ -205,16 +205,10 @@ annotate Customer with @(
   customerName @(
     title       : '{i18n>customerName}',
     description : '{i18n>customerName}',
-    Common      : {
-        FieldControl             : #Mandatory
-    }
   );
   customerSurname @(
     title       : '{i18n>customerSurname}',
     description : '{i18n>customerSurname}',
-    Common      : {
-      FieldControl : #Mandatory
-    }
   );
   company @(
     title       : '{i18n>company}',

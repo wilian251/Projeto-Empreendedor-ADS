@@ -47,19 +47,6 @@ sap.ui.define([
             }
         },
 
-        onLiveChangeCEP: function(oEvent) {
-            let oValue = String(this._clearFormatting(oEvent.getParameter("value")));
-
-            if(oEvent.getParameter("value") != ""){
-
-                let oValueFormatted = Formatter.cep(oValue);
-
-                this.byId(oEvent.getParameter("id")).setValue(oValueFormatted);
-            }else {
-                this.byId(oEvent.getParameter("id")).setValue("");
-            }
-        },
-
         onLiveChangeTelephone: function(oEvent) {
             let oValue = String(this._clearFormatting(oEvent.getParameter("value")));
 
@@ -200,19 +187,12 @@ sap.ui.define([
                         oObjectCustomer.customer.CNPJ             = oData.CNPJ;
                         oObjectCustomer.customer.customerName     = oData.customerName;
                         oObjectCustomer.customer.customerSurname  = oData.customerSurname;
-                        oObjectCustomer.customer.company          = oData.company;
                         oObjectCustomer.customer.customerEmail    = oData.customerEmail;
                         oObjectCustomer.customer.telephone        = oData.telephone;
                         oObjectCustomer.customer.customerSource   = oData.customerSource;
                         oObjectCustomer.customer.customerType     = oData.customerType;
                         oObjectCustomer.customer.customerInactive = oData.customerInactive;
-                        oObjectCustomer.customer.zipCode          = oData.zipCode;
-                        oObjectCustomer.customer.street           = oData.street;
-                        oObjectCustomer.customer.number           = oData.number;
-                        oObjectCustomer.customer.neighborhood     = oData.neighborhood;
-                        oObjectCustomer.customer.city             = oData.city;
-                        oObjectCustomer.customer.state            = oData.state;
-                        oObjectCustomer.customer.country          = oData.country;
+                        
                         this.getModel("object").setData(oObjectCustomer);
                         this.getModel("object").refresh(true);
 
@@ -274,10 +254,7 @@ sap.ui.define([
 
         _validationFields: function() {
             let oModel      = this.getModel("object").getData(),
-                oFieldClass = ["CNPJ", "customerName","customerSurname","company",
-                               "customerEmail", "telephone", "customerSource", "customerType",
-                               "customerInactive", "zipCode", "street", "number", "neighborhood",
-                               "city", "state", "country"],
+                oFieldClass = ["CNPJ", "customerName", "customerEmail", "telephone"],
                 bValid      = true;
 
             oFieldClass.forEach(sField => {

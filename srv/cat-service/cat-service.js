@@ -1,5 +1,5 @@
 const cds = require('@sap/cds');
-const { ProposalNumerator, ItemsNumerators } = require("../common/create-sequence-numerators");
+const { ProposalNumerator } = require("../common/create-sequence-numerators");
 
 class CatalogService extends cds.ApplicationService {
     init() {

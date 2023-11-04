@@ -17,7 +17,7 @@ sap.ui.define([], function() {
 					customerEmail: "",
 					telephone: "",
 					customerSource: "",
-					customerType: "",
+					customerType: "3",
 					customerInactive: false,
 					zipCode: "",
 					street : "",
@@ -73,7 +73,7 @@ sap.ui.define([], function() {
 						ValueStateText: ""
 					},
 					customerType: {
-						Enabled: true,
+						Enabled: false,
 						ValueState: sap.ui.core.ValueState.None,
 						ValueStateText: ""
 					},

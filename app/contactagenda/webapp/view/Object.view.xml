@@ -1,6 +1,6 @@
 <mvc:View
     xmlns:mvc="sap.ui.core.mvc"
-	controllerName="finalproject.app.customerts.controller.Object"
+	controllerName="finalproject.app.contactagenda.controller.Object"
     xmlns="sap.uxap"
 	xmlns:layout="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
@@ -175,24 +175,7 @@
                                         valueStateText="{object>/State/customerName/ValueStateText}"
                                         enabled="{object>/State/customerName/Enabled}"
                                     />
-
-                                    <m:Label required="true" text="{i18n>objectViewLabelCustomerSurname}"/>
-                                    <m:Input
-                                        required="true"
-                                        value="{object>/customer/customerSurname}"
-                                        valueState="{object>/State/customerSurname/ValueState}"
-                                        valueStateText="{object>/State/customerSurname/ValueStateText}"
-                                        enabled="{object>/State/customerSurname/Enabled}"
-                                    />
                                     <core:Title />
-                                    <m:Label required="true" text="{i18n>objectViewLabelCompany}"/>
-                                    <m:Input
-                                        required="true"
-                                        value="{object>/customer/company}"
-                                        valueState="{object>/State/company/ValueState}"
-                                        valueStateText="{object>/State/company/ValueStateText}"
-                                        enabled="{object>/State/company/Enabled}"
-                                    />
                                     
                                     <m:Label required="true" text="{i18n>objectViewLabelCustomerEmail}"/>
                                     <m:Input 
@@ -222,15 +205,6 @@
                                     />
 
                                     <core:Title />
-                                    <m:Label required="true" text="{i18n>objectViewLabelCustomerSource}"/>
-                                    <m:Input
-                                        required="true"
-                                        value="{object>/customer/customerSource}"
-                                        valueState="{object>/State/customerSource/ValueState}"
-                                        valueStateText="{object>/State/customerSource/ValueStateText}"
-                                        enabled="{object>/State/customerSource/Enabled}"
-                                    />
-                                    
                                     <m:Label required="true" text="{i18n>objectViewLabelCustomerType}"/>
                                     <m:ComboBox
                                         id="idComboBoxCustomerType"
@@ -249,13 +223,6 @@
                                     >
                                         <core:ListItem key="{customerStatusNumber}" text="{customerStatusDescription}({customerStatusNumber})" additionalText = "{customerStatusDescription}"/>
                                     </m:ComboBox>
-
-                                    <m:Label text="{i18n>objectViewLabelCustomerInactive}"/>
-                                    <m:CheckBox 
-                                        select="{object>/customer/customerInactive}"
-                                        valueState="{object>/State/customerInactive/ValueState}"
-                                        enabled="{object>/State/customerInactive/Enabled}"
-                                    />
                                 
                                 </f:content>
                             </f:SimpleForm>
@@ -287,28 +254,16 @@
                                     <m:Label text="{i18n>objectViewLabelCustomerName}"/>
                                     <m:Text text="{object>/customer/customerName}"/>
                                     
-                                    <m:Label text="{i18n>objectViewLabelCustomerSurname}"/>
-                                    <m:Text text="{object>/customer/customerSurname}"/>
-                                    
-                                    <core:Title />
-                                    <m:Label text="{i18n>objectViewLabelCompany}"/>
-                                    <m:Text text="{object>/customer/company}"/>
-                                    
+                                    <core:Title />                                 
                                     <m:Label text="{i18n>objectViewLabelCustomerEmail}"/>
                                     <m:Text text="{object>/customer/customerEmail}"/>
                                     
                                     <m:Label text="{i18n>objectViewLabelTelephone}"/>
                                     <m:Text text="{object>/customer/telephone}"/>
                                     
-                                    <core:Title />
-                                    <m:Label text="{i18n>objectViewLabelCustomerSource}"/>
-                                    <m:Text text="{object>/customer/customerSource}"/>
-                                    
+                                    <core:Title />                                    
                                     <m:Label text="{i18n>objectViewLabelCustomerType}"/>
                                     <m:Text text="{object>/customerStatus/customerStatusDescription}({object>/customer/customerType})"/>
-                                    
-                                    <m:Label text="{i18n>objectViewLabelCustomerInactive}"/>
-                                    <m:Text text="{object>/customer/customerInactive}"/>
                                     
                                 </f:content>
                             </f:SimpleForm>
@@ -317,7 +272,7 @@
                 </subSections>
             </ObjectPageSection>
 
-            <ObjectPageSection titleUppercase="false" title="{i18n>objectViewObjectPageSectionAddress}">
+            <!--<ObjectPageSection titleUppercase="false" title="{i18n>objectViewObjectPageSectionAddress}">
                 <subSections>
                     <ObjectPageSubSection title="{i18n>objectViewObjectPageSectionAddress}" titleUppercase="false">
                         <blocks>
@@ -468,7 +423,7 @@
                         </blocks>
                     </ObjectPageSubSection>
                 </subSections>
-            </ObjectPageSection>
+            </ObjectPageSection>-->
         </sections>
     </ObjectPageLayout>
 </mvc:View>

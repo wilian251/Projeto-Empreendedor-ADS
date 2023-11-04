@@ -1,0 +1,110 @@
+<mvc:View 
+    controllerName="finalproject.app.contactagenda.controller.Main"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+>
+    <NavContainer id="idNavContainer">
+        <pages>
+            <Page id="idPage">
+                <content>
+                    <VBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar 
+                            id="idSmartFilterBar" 
+                            entitySet="Customer" 
+                            persistencyKey="SmartFilter_Explored"
+                        >   
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration
+                                    index="0"
+                                    key="CNPJ"
+                                    visibleInAdvancedArea="true"
+                                    preventInitialDataFetchInValueHelpDialog="false"
+                                />
+                                <smartFilterBar:ControlConfiguration
+                                    index="1"
+                                    key="customerName"
+                                    visibleInAdvancedArea="true"
+                                    preventInitialDataFetchInValueHelpDialog="false"
+                                />
+                                <smartFilterBar:ControlConfiguration
+                                    index="2"
+                                    key="customerSurname"
+                                    visibleInAdvancedArea="true"
+                                    preventInitialDataFetchInValueHelpDialog="false"
+                                />
+                                <smartFilterBar:ControlConfiguration
+                                    index="3"
+                                    key="customerEmail"
+                                    visibleInAdvancedArea="true"
+                                    preventInitialDataFetchInValueHelpDialog="false"
+                                />
+                                <smartFilterBar:ControlConfiguration
+                                    index="4"
+                                    key="telephone"
+                                    visibleInAdvancedArea="true"
+                                    preventInitialDataFetchInValueHelpDialog="false"
+                                />
+                                <smartFilterBar:ControlConfiguration
+                                    index="5"
+                                    key="customerType"
+                                    visibleInAdvancedArea="true"
+                                    preventInitialDataFetchInValueHelpDialog="false"
+                                />
+                            </smartFilterBar:controlConfiguration>
+                            <smartFilterBar:layoutData>
+                                <FlexItemData shrinkFactor="0"/>
+                            </smartFilterBar:layoutData>
+                        </smartFilterBar:SmartFilterBar>
+                        <smartTable:SmartTable 
+                            id="idSmartTable" 
+                            entitySet="Customer" 
+                            smartFilterId="idSmartFilterBar" 
+                            tableType="ResponsiveTable"
+                            header="{i18n>customer}"
+                            persistencyKey="SmartTableAnalytical_Explored" 
+                            enableAutoBinding="true"
+                            class="sapUiResponsiveContentPadding"
+                            enableAutoColumnWidth="true"
+                            initiallyVisibleFields="CNPJ,customerName,customerSurname,customerEmail,customerType"
+                            beforeRebindTable="onBeforeRebindTable"
+                        >
+                            <smartTable:customToolbar>
+                                <OverflowToolbar>
+
+                                    <ToolbarSpacer />    
+
+                                    <ToggleButton 
+                                        id="btnListMessages" 
+                                        icon="sap-icon://add" 
+                                        text="{i18n>mainViewButtonTextAdd}"
+                                        press="onAddCustomer" />
+
+                                </OverflowToolbar>
+                            </smartTable:customToolbar>
+                            <Table>
+                                <columns>
+                                </columns>
+                                <items>
+                                    <ColumnListItem
+                                        press="onPressCustomer"
+                                        type="Navigation"
+                                    >
+                                        <cells>
+                                            
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                            <smartTable:layoutData>
+                                <FlexItemData growFactor="1" baseSize="0%"/>
+                            </smartTable:layoutData>
+                        </smartTable:SmartTable>
+                    </VBox>
+                </content>
+            </Page>
+        </pages>
+    </NavContainer>    
+</mvc:View>
