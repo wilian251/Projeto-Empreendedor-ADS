@@ -80,6 +80,10 @@ modules:
       - finalprojectappcustomerts.zip
       name: finalprojectappcustomerts
       target-path: resources/
+    - artifacts:
+      - finalprojectappcontactagenda.zip
+      name: finalprojectappcontactagenda
+      target-path: resources/
 - name: finalprojectappusers
   type: html5
   path: app/users
@@ -163,6 +167,16 @@ modules:
 - name: finalprojectappcustomerts
   type: html5
   path: app/customerts
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: finalprojectappcontactagenda
+  type: html5
+  path: app/contactagenda
   build-parameters:
     build-result: dist
     builder: custom
