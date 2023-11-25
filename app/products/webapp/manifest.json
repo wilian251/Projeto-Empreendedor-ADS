@@ -141,30 +141,10 @@
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "ProductsFiori",
-                            "content": {
-                                "body": {
-                                    "sections": {
-                                        "myCustomSection": {
-                                            "template": "finalproject.app.products.custom.fragment.Novo",
-                                            "title": "teste",
-                                            "position": {
-                                                "placement": "Before",
-                                                "anchor": "com.sap.vocabularies.UI.v1.FieldGroup::GeneralData"
-                                            },
-                                            "type": "XMLFragment"
-                                        }
-                                    }
-                                }
-                            }
+                            "entitySet": "ProductsFiori"
                         }
                     }
                 }
-            }
-        },
-        "extends": {
-            "extensions": {
-                "sap.ui.controllerExtensions": {}
             }
         }
     },
