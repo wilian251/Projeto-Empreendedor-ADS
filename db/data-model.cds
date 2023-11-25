@@ -262,7 +262,7 @@ entity Products : cuid , managed {
   productCode: String not null default 'Novo' @mandatory @readonly;
   productName: String not null;
   productDescription: String not null;
-  productValue: Decimal not null @Measures.ISOCurrency: currency_code;
+  productValue: Decimal not null;
   productInactive: Boolean not null default false;
 }
 
@@ -648,7 +648,7 @@ annotate Proposal with @(
 entity ProposalItems : cuid, managed {
   proposalItemNumber: String not null @mandatory @readonly;
   proposalItemQtd: String not null;
-  proposalItemValue: Decimal not null @Measures.ISOCurrency: currency_code;
+  proposalItemValue: Decimal not null;
   proposal: Association to Proposal @readonly;
 }
 
