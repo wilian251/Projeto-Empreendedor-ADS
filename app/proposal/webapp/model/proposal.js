@@ -27,7 +27,7 @@ sap.ui.define([], function() {
                 },
 				State: {
 					proposalNumber: {
-						Enabled: true,
+						Enabled: false,
 						ValueState: sap.ui.core.ValueState.None,
 						ValueStateText: ""
 					},
@@ -37,7 +37,7 @@ sap.ui.define([], function() {
 						ValueStateText: ""
 					},
 					proposalExpirationDate: {
-						Enabled: true,
+						Enabled: false,
 						ValueState: sap.ui.core.ValueState.None,
 						ValueStateText: ""
 					},

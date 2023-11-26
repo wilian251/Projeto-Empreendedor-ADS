@@ -508,7 +508,7 @@ entity Proposal : cuid, managed {
   proposalTitle: String not null;
   proposalExpirationDate: Date not null;
   proposalStatusNumber: String not null;
-  customer: Composition of many Customer;
+  customer: Association to one Customer;
   order: Association to one Orders;
   proposalStatus: Association to one StatusOrder on proposalStatus.orderStatusNumber = proposalStatusNumber;
   proposalItems: Composition of many ProposalItems on proposalItems.proposal = $self;
@@ -646,10 +646,10 @@ annotate Proposal with @(
 //------------------------------------------------------//
 
 entity ProposalItems : cuid, managed {
-  proposalItemNumber: String not null @mandatory @readonly;
+  proposalItemNumber: String not null @mandatory;
   proposalItemQtd: String not null;
   proposalItemValue: Decimal not null;
-  proposal: Association to Proposal @readonly;
+  proposal: Association to one Proposal @readonly;
 }
 
 @cds.odata.valuelist

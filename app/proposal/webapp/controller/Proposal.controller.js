@@ -149,7 +149,9 @@ sap.ui.define([
 
                             oModel.proposal.proposalItems.map(sItem => {
                                 let oItem = sItem;
+                                
                                 oItem.proposalItemValue = oItem.proposalItemValue.replaceAll(".", "").replace(",", ".");
+                                oItem.proposal_ID = oData.ID;
 
                                 oPromiseItems.push(
                                     new Promise(
@@ -223,7 +225,8 @@ sap.ui.define([
                         let oObjectProposal = Proposal.initSelectionModel();
 
                         oObjectProposal.orderId = oOrderId;
-                        oObjectProposal.proposal.proposalTitle = this.getResourceBundle().getText("proposalViewLabelNew");
+                        oObjectProposal.proposal.proposalNumber = this.getResourceBundle().getText("proposalViewLabelNew");
+                        oObjectProposal.proposal.proposalExpirationDate = oData.orderExpirationDate;
 
                         oData.orderItems.results.map(sItem => {
                             oObjectProposal.proposal.proposalItems.push(this._createObjectItem(sItem));
