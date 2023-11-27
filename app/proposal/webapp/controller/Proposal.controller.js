@@ -41,6 +41,12 @@ sap.ui.define([
             }
         },
 
+        onUpdateStarted: function(oEvent) {
+            let oBinding = oEvent.getSource().getAggregation("_dialog").getAggregation("content")[1].getBinding("items");
+
+            oBinding.aFilters.push(new Filter("customerType", FilterOperator.NE, "3"));
+        },
+
         onPressCustomer: async function(oEvent) {
             if(!this._oCustomerFragment){
                 this._oCustomerFragment = Fragment.load({
@@ -149,9 +155,9 @@ sap.ui.define([
 
                             oModel.proposal.proposalItems.map(sItem => {
                                 let oItem = sItem;
-                                
+
                                 oItem.proposalItemValue = oItem.proposalItemValue.replaceAll(".", "").replace(",", ".");
-                                oItem.proposal_ID = oData.ID;
+                                oItem.proposalID = oData.ID;
 
                                 oPromiseItems.push(
                                     new Promise(

@@ -11,6 +11,13 @@
         multiSelect="false"
 		items="{
 			path : '/Customer',
+			filters: [
+				{
+					path: 'customerType',
+					operator: 'NE',
+					value1: '3'
+				}
+			],
 			sorter : {
 				path : 'CNPJ',
 				descending : false

@@ -649,7 +649,8 @@ entity ProposalItems : cuid, managed {
   proposalItemNumber: String not null @mandatory;
   proposalItemQtd: String not null;
   proposalItemValue: Decimal not null;
-  proposal: Association to one Proposal @readonly;
+  proposalID: String not null;
+  proposal: Association to one Proposal on proposal.ID = proposalID @readonly;
 }
 
 @cds.odata.valuelist

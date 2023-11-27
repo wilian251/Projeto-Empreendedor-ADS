@@ -26,6 +26,12 @@ sap.ui.define([
         /* event handlers                                              */
         /* =========================================================== */
 
+        onBeforeRebindTable: function(oEvent) {
+            let oFilters = oEvent.getParameter("bindingParams").filters;
+
+            oFilters.push(new Filter("customerType", FilterOperator.NE, "3"));
+        },
+
         onPressCustomer: function(oEvent) {
             let oObject = oEvent.getSource().getBindingContext().getObject();
 

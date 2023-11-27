@@ -68,6 +68,7 @@
                             enableAutoBinding="true"
                             class="sapUiResponsiveContentPadding"
                             enableAutoColumnWidth="true"
+                            beforeRebindTable="onBeforeRebindTable"
                             initiallyVisibleFields="CNPJ,customerName,customerSurname,customerEmail,customerType"
                         >
                             <smartTable:customToolbar>
